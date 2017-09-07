@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 namespace MyMapper.UnitTests.Mappers
 {
+    using System.Threading.Tasks;
     using MyMapper;
     using MyMapper.Converters;
     using MyMapper.UnitTests.Entities;
-    using System.Threading.Tasks;
 
     public interface IResponseMapper
     {
@@ -87,7 +82,6 @@ namespace MyMapper.UnitTests.Mappers
         }
 
         public Response3 Map(Response1 response1)
-        //public async Task<Response3> Map(Response1 response1)
         {
             return Mapper<Response1, Response3>.Map(response1)
                                                     .With(r1 => r1.ConsumerID, (r3, consumerId) => r3.IDNumber = consumerId)
