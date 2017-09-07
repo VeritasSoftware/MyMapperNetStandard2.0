@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace MyMapper.UnitTests
+namespace MyMapper.UnitTests.Mappers
 {
     public interface IMapper
     {
