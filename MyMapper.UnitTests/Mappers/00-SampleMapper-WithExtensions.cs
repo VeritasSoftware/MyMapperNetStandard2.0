@@ -1,9 +1,7 @@
-﻿using MyMapper.UnitTests.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using MyMapper.UnitTests.Entities;
 
 namespace MyMapper.UnitTests.Mappers
 {
@@ -28,37 +26,6 @@ namespace MyMapper.UnitTests.Mappers
 
     public class Mapper : IMapper
     {
-        public bool IsPalindrome (long number)
-        {
-
-            
-
-            var numStr = number.ToString();
-
-            //var reverseNumStr = numStr.Reverse();
-
-            //return numStr == (string)reverseNumStr;
-
-            //var r = new Regex("(?=^(" + numStr + ")$)(?<=$" + numStr + "^)");
-            //var r = new Regex(@"^404$");
-
-            //var r = new Regex(@"^" + numStr + "$");
-            var r = new Regex(@"^" + numStr + "(?<=" + numStr + ")");
-
-
-            if (r.Match(numStr).Success)
-            {
-                //r = new Regex("$(?!" + numStr + ")");
-
-                r = new Regex("^" + numStr.Reverse() + "$");
-
-                return r.Match(numStr).Success;
-            }
-            //if (?!^" + numStr + "$)");
-
-            return r.Match(numStr).Success;
-        }
-
         //Mapping Rules for mapping from Details1 to Details3
         private Details3 MapRules(IMyMapperRules<Details1, Details3> myMapper)
         {

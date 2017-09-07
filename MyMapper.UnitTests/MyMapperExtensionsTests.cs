@@ -133,50 +133,15 @@ namespace MyMapper.UnitTests
             var resultFundList = new Mapper().Map(fundsList);
 
             Assert.IsTrue(resultFundList.Count() == 2);
-        }
-
-        public class Source
-        {
-            public int I { get; set; }
-        }
-
-        public class Destination
-        {
-            public int I { get; set; }
-
-            //public void Assign(Destination dest)
-            //{
-            //    this = dest;
-            //}
-
-            public void MapSource (Source source)
-            {
-                //source.Map(this);
-
-                //this.Map<Destination, Source>(source);
-                //this.Map(source);
-            }
-        }
+        }              
 
         [TestMethod]
         public async Task MyMapper_IEnumerable_AsyncExtension_Test()
-        {
-
-            Source source = new Source { I = 10 };
-
-            Destination dest = new Destination();
-
-            dest.MapSource(source);
-
-
-            var isPalindrom = new Mapper().IsPalindrome(404);
-            isPalindrom = new Mapper().IsPalindrome(53);
-
-
+        {                    
             List<Details1> detailsList = new List<Details1>()
-                {
-                    new Details1 { DOB = DateTime.Now, IsDisabled = false },
-                    new Details1 { DOB = DateTime.Now.AddDays(-1), IsDisabled = true }
+            {
+                new Details1 { DOB = DateTime.Now, IsDisabled = false },
+                new Details1 { DOB = DateTime.Now.AddDays(-1), IsDisabled = true }
             };
 
             //Specify MyMapper mapping rules - turn off automapping
