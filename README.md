@@ -1,5 +1,6 @@
 # MyMapper
-MyMapper port to .Net Standard 2.0
+
+**MyMapper port to .NET Standard 2.0**
 
 .NET light-weight, powerful object mapping framework. Fluent design. Dependency injectable.
 
