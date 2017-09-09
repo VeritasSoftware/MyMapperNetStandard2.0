@@ -72,8 +72,8 @@ namespace MyMapper.UnitTests
 
             Assert.IsTrue(response3.IDNumber == response1.ConsumerID);
             Assert.IsTrue(response3.TotalPurchases == 120);
-            Assert.IsTrue(response3.Details.DateOfBirth == response3.Details.DateOfBirth);
-            Assert.IsTrue(response3.Details.IsHandicapped);
+            Assert.IsTrue(response3.Details.DateOfBirth == response1.Details.DOB);
+            Assert.IsTrue(response3.Details.IsHandicapped == response1.Details.IsDisabled);
             Assert.IsTrue(response3.InsuranceInfo.MembershipNo == response1.InsuranceEmployment.EmploymentNumber);
             Assert.IsTrue(response3.InsuranceInfo.TaxNumber == response1.InsuranceEmployment.TaxNumber);
             Assert.IsTrue(response3.Fund.BankIdNo == response1.MutualFund.BankIdNo);
@@ -153,8 +153,8 @@ namespace MyMapper.UnitTests
 
             Assert.IsTrue(response3.IDNumber == response1.ConsumerID);
             Assert.IsTrue(response3.TotalPurchases == 120);
-            Assert.IsTrue(response3.Details.DateOfBirth == response3.Details.DateOfBirth);
-            Assert.IsTrue(response3.Details.IsHandicapped);
+            Assert.IsTrue(response3.Details.DateOfBirth == response1.Details.DOB);
+            Assert.IsTrue(response3.Details.IsHandicapped == response1.Details.IsDisabled);
             Assert.IsTrue(response3.InsuranceInfo.MembershipNo == response1.InsuranceEmployment.EmploymentNumber);
             Assert.IsTrue(response3.InsuranceInfo.TaxNumber == response1.InsuranceEmployment.TaxNumber);
             Assert.IsTrue(response3.Fund.BankIdNo == response1.MutualFund.BankIdNo);
