@@ -70,12 +70,12 @@ namespace MyMapper.UnitTests
             //The mapping
             var response3 = mapper.Map(response1);
 
-            Assert.IsTrue(response3.IDNumber == 123);
+            Assert.IsTrue(response3.IDNumber == response1.ConsumerID);
             Assert.IsTrue(response3.TotalPurchases == 120);
-            Assert.IsTrue(response3.Details.DateOfBirth == dob);
+            Assert.IsTrue(response3.Details.DateOfBirth == response3.Details.DateOfBirth);
             Assert.IsTrue(response3.Details.IsHandicapped);
-            Assert.IsTrue(response3.InsuranceInfo.MembershipNo == "678");
-            Assert.IsTrue(response3.InsuranceInfo.TaxNumber == "456");
+            Assert.IsTrue(response3.InsuranceInfo.MembershipNo == response1.InsuranceEmployment.EmploymentNumber);
+            Assert.IsTrue(response3.InsuranceInfo.TaxNumber == response1.InsuranceEmployment.TaxNumber);
             Assert.IsTrue(response3.Fund.BankIdNo == response1.MutualFund.BankIdNo);
             Assert.IsTrue(response3.Fund.FundId == response1.MutualFund.FundId);
             Assert.IsTrue(response3.Fund.Name == response1.MutualFund.Name);
@@ -84,6 +84,11 @@ namespace MyMapper.UnitTests
             Assert.IsTrue(response3.Fund.Address.State.Abbr == response1.MutualFund.Address.State.Abbr);
             Assert.IsTrue(response3.Fund.Address.Country.Name == response1.MutualFund.Address.Country.Name);
             Assert.IsTrue(response3.Fund.Address.Country.Abbr == response1.MutualFund.Address.Country.Abbr);
+            Assert.IsTrue(response3.BankingInformation.Count == response1.BankingInfos.Count);
+            Assert.IsTrue(response3.BankingInformation[0].AccountName == response1.BankingInfos[0].AccountName);
+            Assert.IsTrue(response3.BankingInformation[0].AccountNumber == response1.BankingInfos[0].AccountNo);
+            Assert.IsTrue(response3.BankingInformation[1].AccountName == response1.BankingInfos[1].AccountName);
+            Assert.IsTrue(response3.BankingInformation[1].AccountNumber == response1.BankingInfos[1].AccountNo);
         }
 
         [TestMethod]
@@ -146,12 +151,12 @@ namespace MyMapper.UnitTests
             //The mapping
             var response3 = await mapper.MapAsync(response1);
 
-            Assert.IsTrue(response3.IDNumber == 123);
+            Assert.IsTrue(response3.IDNumber == response1.ConsumerID);
             Assert.IsTrue(response3.TotalPurchases == 120);
-            Assert.IsTrue(response3.Details.DateOfBirth == dob);
+            Assert.IsTrue(response3.Details.DateOfBirth == response3.Details.DateOfBirth);
             Assert.IsTrue(response3.Details.IsHandicapped);
-            Assert.IsTrue(response3.InsuranceInfo.MembershipNo == "678");
-            Assert.IsTrue(response3.InsuranceInfo.TaxNumber == "456");
+            Assert.IsTrue(response3.InsuranceInfo.MembershipNo == response1.InsuranceEmployment.EmploymentNumber);
+            Assert.IsTrue(response3.InsuranceInfo.TaxNumber == response1.InsuranceEmployment.TaxNumber);
             Assert.IsTrue(response3.Fund.BankIdNo == response1.MutualFund.BankIdNo);
             Assert.IsTrue(response3.Fund.FundId == response1.MutualFund.FundId);
             Assert.IsTrue(response3.Fund.Name == response1.MutualFund.Name);
@@ -160,6 +165,11 @@ namespace MyMapper.UnitTests
             Assert.IsTrue(response3.Fund.Address.State.Abbr == response1.MutualFund.Address.State.Abbr);
             Assert.IsTrue(response3.Fund.Address.Country.Name == response1.MutualFund.Address.Country.Name);
             Assert.IsTrue(response3.Fund.Address.Country.Abbr == response1.MutualFund.Address.Country.Abbr);
+            Assert.IsTrue(response3.BankingInformation.Count == response1.BankingInfos.Count);
+            Assert.IsTrue(response3.BankingInformation[0].AccountName == response1.BankingInfos[0].AccountName);
+            Assert.IsTrue(response3.BankingInformation[0].AccountNumber == response1.BankingInfos[0].AccountNo);
+            Assert.IsTrue(response3.BankingInformation[1].AccountName == response1.BankingInfos[1].AccountName);
+            Assert.IsTrue(response3.BankingInformation[1].AccountNumber == response1.BankingInfos[1].AccountNo);
         }
     }
 }
