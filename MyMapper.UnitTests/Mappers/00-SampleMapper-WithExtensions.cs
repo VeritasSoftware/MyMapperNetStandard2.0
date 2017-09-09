@@ -44,12 +44,7 @@ namespace MyMapper.UnitTests.Mappers
         //Same as above - using Async
         public async Task<Details3> MapAsync(Details1 details1)
         {
-            //return await details1.MapAsync<Details1, Details3>(MapRules, false);
-
-            return await Mapper<Details1, Details3>.MapAsync(details1, false)
-                                                        .With(s => s.DOB, (d, dob) => d.DateOfBirth = dob)
-                                                        .With(s => s.IsDisabled, (d, disabled) => d.IsHandicapped = disabled)
-                                                    .Exec();
+            return await details1.MapAsync<Details1, Details3>(MapRules, false);            
         }
 
         //Specify MyMapper mapping rules - turn off automapping
