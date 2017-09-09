@@ -115,4 +115,12 @@ namespace MyMapper
         TDestination Exec<TConverter>(TSource source)
             where TConverter : ITypeConverter<TSource, TDestination>, new();
     }
+
+    [Obsolete("Interface is deprecated.", true)]
+    public interface IMap<TSource, TDestination>
+    where TSource : class
+    where TDestination : class, new()
+    {
+        TDestination Map(TSource source, IMyMapper<TSource, TDestination> mapper);
+    }
 }

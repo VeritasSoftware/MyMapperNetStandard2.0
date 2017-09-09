@@ -8,15 +8,6 @@ namespace MyMapper
     using System.Threading.Tasks;
     using MyMapper.Converters;
 
-    [Obsolete("Interface is deprecated.", true)]
-    public interface IMap<TSource, TDestination>
-        where TSource : class
-        where TDestination : class, new()
-    {
-        TDestination Map(TSource source, IMyMapper<TSource, TDestination> mapper);
-    }
-
-#region MyMapper
     /// <summary>
     /// MyMapper - Generic class
     /// </summary>
@@ -385,5 +376,4 @@ namespace MyMapper
             return new TConverter().Convert(source);
         }
     }    
-#endregion
 }
