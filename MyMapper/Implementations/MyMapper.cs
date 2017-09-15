@@ -375,5 +375,17 @@ namespace MyMapper
         {
             return new TConverter().Convert(source);
         }
+
+        /// <summary>
+        /// Exec Async
+        /// </summary>
+        /// <typeparam name="TConverter">The converter type</typeparam>
+        /// <param name="source">The source</param>
+        /// <returns>The destination <see cref="Task{TDestination}"/></returns>
+        public async Task<TDestination> ExecAsync<TConverter>(TSource source)
+            where TConverter : ITypeConverterAsync<TSource, TDestination>, new()
+        {
+            return await new TConverter().ConvertAsync(source);
+        }
     }    
 }
