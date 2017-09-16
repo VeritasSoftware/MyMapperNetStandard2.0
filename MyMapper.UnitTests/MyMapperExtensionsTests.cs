@@ -45,7 +45,14 @@ namespace MyMapper.UnitTests
 
             Fund3 fund3 = new Mapper().Map(fund1);
 
-            Assert.IsTrue(fund3.Name == "Sun");
+            Assert.IsTrue(fund3.FundId == fund1.FundId);
+            Assert.IsTrue(fund3.Name == fund1.Name);
+            Assert.IsTrue(fund3.Address.StreetNo == fund1.Address.StreetNo);
+            Assert.IsTrue(fund3.Address.State.Name == fund1.Address.State.Name);
+            Assert.IsTrue(fund3.Address.State.Abbr == fund1.Address.State.Abbr);
+            Assert.IsTrue(fund3.Address.Country.Name == fund1.Address.Country.Name);
+            Assert.IsTrue(fund3.Address.Country.Abbr == fund1.Address.Country.Abbr);
+            Assert.IsTrue(fund3.BankIdNo == fund1.BankIdNo);
         }
 
         [TestMethod]
@@ -82,7 +89,14 @@ namespace MyMapper.UnitTests
 
             Fund3 fund3 = await new Mapper().MapAsync(fund1);
 
-            Assert.IsTrue(fund3.Name == "Sun");
+            Assert.IsTrue(fund3.FundId == fund1.FundId);
+            Assert.IsTrue(fund3.Name == fund1.Name);
+            Assert.IsTrue(fund3.Address.StreetNo == fund1.Address.StreetNo);
+            Assert.IsTrue(fund3.Address.State.Name == fund1.Address.State.Name);
+            Assert.IsTrue(fund3.Address.State.Abbr == fund1.Address.State.Abbr);
+            Assert.IsTrue(fund3.Address.Country.Name == fund1.Address.Country.Name);
+            Assert.IsTrue(fund3.Address.Country.Abbr == fund1.Address.Country.Abbr);
+            Assert.IsTrue(fund3.BankIdNo == fund1.BankIdNo);
         }
 
         [TestMethod]
@@ -100,6 +114,18 @@ namespace MyMapper.UnitTests
             var resultDetailsList = new Mapper().Map(detailsList);
 
             Assert.IsTrue(resultDetailsList.Count() == 2);
+
+            int i = 0;
+
+            detailsList.ForEach(details1 =>
+            {
+                var details3 = resultDetailsList.ToArray()[i];
+
+                Assert.IsTrue(details1.DOB == details3.DateOfBirth);
+                Assert.IsTrue(details1.IsDisabled == details3.IsHandicapped);
+
+                i++;
+            });
 
             List<Fund1> fundsList = new List<Fund1>
             {
@@ -133,6 +159,24 @@ namespace MyMapper.UnitTests
             var resultFundList = new Mapper().Map(fundsList);
 
             Assert.IsTrue(resultFundList.Count() == 2);
+
+            i = 0;
+
+            fundsList.ForEach(fund1 =>
+            {
+                var fund3 = resultFundList.ToArray()[i];
+
+                Assert.IsTrue(fund3.FundId == fund1.FundId);
+                Assert.IsTrue(fund3.Name == fund1.Name);
+                Assert.IsTrue(fund3.Address.StreetNo == fund1.Address.StreetNo);
+                Assert.IsTrue(fund3.Address.State.Name == fund1.Address.State.Name);
+                Assert.IsTrue(fund3.Address.State.Abbr == fund1.Address.State.Abbr);
+                Assert.IsTrue(fund3.Address.Country.Name == fund1.Address.Country.Name);
+                Assert.IsTrue(fund3.Address.Country.Abbr == fund1.Address.Country.Abbr);
+                Assert.IsTrue(fund3.BankIdNo == fund1.BankIdNo);
+
+                i++;
+            });
         }              
 
         [TestMethod]
@@ -150,6 +194,18 @@ namespace MyMapper.UnitTests
             var resultDetailsList = await new Mapper().MapAsync(detailsList);
 
             Assert.IsTrue(resultDetailsList.Count() == 2);
+
+            int i = 0;
+
+            detailsList.ForEach(details1 =>
+            {
+                var details3 = resultDetailsList.ToArray()[i];
+
+                Assert.IsTrue(details1.DOB == details3.DateOfBirth);
+                Assert.IsTrue(details1.IsDisabled == details3.IsHandicapped);
+
+                i++;
+            });            
 
             List<Fund1> fundsList = new List<Fund1>
             {
@@ -183,6 +239,24 @@ namespace MyMapper.UnitTests
             var resultFundList = await new Mapper().MapAsync(fundsList);
 
             Assert.IsTrue(resultFundList.Count() == 2);
+
+            i = 0;
+
+            fundsList.ForEach(fund1 =>
+            {
+                var fund3 = resultFundList.ToArray()[i];
+
+                Assert.IsTrue(fund3.FundId == fund1.FundId);
+                Assert.IsTrue(fund3.Name == fund1.Name);
+                Assert.IsTrue(fund3.Address.StreetNo == fund1.Address.StreetNo);
+                Assert.IsTrue(fund3.Address.State.Name == fund1.Address.State.Name);
+                Assert.IsTrue(fund3.Address.State.Abbr == fund1.Address.State.Abbr);
+                Assert.IsTrue(fund3.Address.Country.Name == fund1.Address.Country.Name);
+                Assert.IsTrue(fund3.Address.Country.Abbr == fund1.Address.Country.Abbr);
+                Assert.IsTrue(fund3.BankIdNo == fund1.BankIdNo);
+
+                i++;
+            });            
         }
 
         [TestMethod]
