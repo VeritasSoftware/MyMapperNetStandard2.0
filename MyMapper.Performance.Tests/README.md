@@ -2,7 +2,7 @@
 
 Running the Test produces a file (like 2017-09-16_Performance_Test_Result.txt) in the bin folder.<br />
 
-*********Async Test Run start*********<br />
+**`*********Async Test Run start*********<br />**
 MyMapper...<br />
 MyMapper mapping elapsed time milliseconds: 10 nanoseconds: 10000000<br />
 MyMapper mapping elapsed time milliseconds: 0 nanoseconds: 0<br />
