@@ -23,7 +23,7 @@ namespace Mapper.Performance.Workbench
             TMapper mapper = new TMapper();
             sw.Stop();
             long initTime = sw.ElapsedMilliseconds;
-            logger.Info(mapper.Name + " initialization elapsed time milliseconds: " + sw.ElapsedMilliseconds + " nanoseconds: " + sw.ElapsedNanoseconds());
+            logger.Info(mapper.Name + " initialization elapsed time milliseconds: " + sw.ElapsedMilliseconds); //+ " nanoseconds: " + sw.ElapsedNanoseconds());
             
             for (int i = 0; i < this.NoOfIterations; i++)
             {
@@ -32,11 +32,11 @@ namespace Mapper.Performance.Workbench
                 map(mapper);
 
                 sw.Stop();
-                logger.Info(mapper.Name + " mapping elapsed time milliseconds: " + sw.ElapsedMilliseconds + " nanoseconds: " + sw.ElapsedNanoseconds());
+                logger.Info(mapper.Name + " mapping elapsed time milliseconds: " + sw.ElapsedMilliseconds); //+ " nanoseconds: " + sw.ElapsedNanoseconds());
                 times.Add(sw.ElapsedMilliseconds);
             }
 
-            logger.Info(mapper.Name + " average elapsed time milliseconds: " + times.Average() + " nanoseconds: " + ((initTime * 1000000) + times.Average() * 1000000));
+            logger.Info(mapper.Name + " average elapsed time milliseconds: " + times.Average());// + " nanoseconds: " + ((initTime * 1000000) + times.Average() * 1000000));
         }
 
         public void RunTests<TMapper>(TMapper mapper, Action<TMapper> map)
@@ -53,11 +53,11 @@ namespace Mapper.Performance.Workbench
                 map(mapper);
 
                 sw.Stop();
-                logger.Info(mapper.Name + " mapping elapsed time milliseconds: " + sw.ElapsedMilliseconds + " nanoseconds: " + sw.ElapsedNanoseconds());
+                logger.Info(mapper.Name + " mapping elapsed time milliseconds: " + sw.ElapsedMilliseconds); // + " nanoseconds: " + sw.ElapsedNanoseconds());
                 times.Add(sw.ElapsedMilliseconds);
             }
 
-            logger.Info(mapper.Name + " average elapsed time milliseconds: " + times.Average() + " nanoseconds: " + (times.Average() * 1000000));
+            logger.Info(mapper.Name + " average elapsed time milliseconds: " + times.Average()); // + " nanoseconds: " + (times.Average() * 1000000));
         }
 
         public async Task RunTestsAsync<TMapper>(TMapper mapper, Action<TMapper> map)
@@ -76,11 +76,11 @@ namespace Mapper.Performance.Workbench
                     map(mapper);
 
                     sw.Stop();
-                    logger.Info(mapper.Name + " mapping elapsed time milliseconds: " + sw.ElapsedMilliseconds + " nanoseconds: " + sw.ElapsedNanoseconds());
+                    logger.Info(mapper.Name + " mapping elapsed time milliseconds: " + sw.ElapsedMilliseconds); // + " nanoseconds: " + sw.ElapsedNanoseconds());
                     times.Add(sw.ElapsedMilliseconds);
                 }
 
-                logger.Info(mapper.Name + " average elapsed time milliseconds: " + times.Average() + " nanoseconds: " + (times.Average() * 1000000));
+            logger.Info(mapper.Name + " average elapsed time milliseconds: " + times.Average()); // + " nanoseconds: " + (times.Average() * 1000000));
             });                       
         }
     }
