@@ -46,6 +46,11 @@ namespace MyMapper.UnitTests
                             Name = "Australia",
                             Abbr = "AU"
                         }
+                    },
+                    FundKeys = new Dictionary<string, string>()
+                    {
+                        { "ABN", "123456" },
+                        { "TFN", "9876543" }
                     }
                 },
                 InsuranceMutualFund = new InsuranceMutualFund { MutualFundNumber = "123", TaxNo = "456" },
@@ -84,6 +89,8 @@ namespace MyMapper.UnitTests
             Assert.IsTrue(response3.Fund.Address.State.Abbr == response1.MutualFund.Address.State.Abbr);
             Assert.IsTrue(response3.Fund.Address.Country.Name == response1.MutualFund.Address.Country.Name);
             Assert.IsTrue(response3.Fund.Address.Country.Abbr == response1.MutualFund.Address.Country.Abbr);
+            Assert.IsTrue(response3.Fund.FundKeys["ABN"] == response1.MutualFund.FundKeys["ABN"]);
+            Assert.IsTrue(response3.Fund.FundKeys["TFN"] == response1.MutualFund.FundKeys["TFN"]);
             Assert.IsTrue(response3.BankingInformation.Count == response1.BankingInfos.Count);
             Assert.IsTrue(response3.BankingInformation[0].AccountName == response1.BankingInfos[0].AccountName);
             Assert.IsTrue(response3.BankingInformation[0].AccountNumber == response1.BankingInfos[0].AccountNo);
@@ -127,6 +134,11 @@ namespace MyMapper.UnitTests
                             Name = "Australia",
                             Abbr = "AU"
                         }
+                    },
+                    FundKeys = new Dictionary<string, string>()
+                    {
+                        { "ABN", "123456" },
+                        { "TFN", "9876543" }
                     }
                 },
                 InsuranceMutualFund = new InsuranceMutualFund { MutualFundNumber = "123", TaxNo = "456" },
@@ -165,6 +177,8 @@ namespace MyMapper.UnitTests
             Assert.IsTrue(response3.Fund.Address.State.Abbr == response1.MutualFund.Address.State.Abbr);
             Assert.IsTrue(response3.Fund.Address.Country.Name == response1.MutualFund.Address.Country.Name);
             Assert.IsTrue(response3.Fund.Address.Country.Abbr == response1.MutualFund.Address.Country.Abbr);
+            Assert.IsTrue(response3.Fund.FundKeys["ABN"] == response1.MutualFund.FundKeys["ABN"]);
+            Assert.IsTrue(response3.Fund.FundKeys["TFN"] == response1.MutualFund.FundKeys["TFN"]);
             Assert.IsTrue(response3.BankingInformation.Count == response1.BankingInfos.Count);
             Assert.IsTrue(response3.BankingInformation[0].AccountName == response1.BankingInfos[0].AccountName);
             Assert.IsTrue(response3.BankingInformation[0].AccountNumber == response1.BankingInfos[0].AccountNo);

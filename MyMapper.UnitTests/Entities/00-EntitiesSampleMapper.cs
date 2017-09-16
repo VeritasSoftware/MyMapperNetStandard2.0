@@ -40,6 +40,8 @@ namespace MyMapper.UnitTests.Entities
         public int FundId { get; set; }
 
         public Address1 Address { get; set; }
+
+        public Dictionary<string, string> FundKeys { get; set; }
     }
 
     public class BankingInfo1
@@ -135,6 +137,8 @@ namespace MyMapper.UnitTests.Entities
         public int FundId { get; set; }
 
         public Address3 Address { get; set; }
+
+        public Dictionary<string, string> FundKeys { get; set; }
     }
 
     public class BankingInfo3
