@@ -10,7 +10,10 @@ namespace MyMapper.Converters
     /// <typeparam name="TSource">The source entity</typeparam>
     /// <typeparam name="TDestination">The destination entity</typeparam>
     /// <exception cref="ArgumentNullException"></exception>
-    public class EntityConverter<TSource, TDestination> : ITypeConverter<TSource, TDestination>, ITypeConverterAsync<TSource, TDestination>
+    public class EntityConverter<TSource, TDestination> : ITypeConverter<TSource, TDestination>
+#if !NET4
+                                                            , ITypeConverterAsync<TSource, TDestination>
+#endif
         where TSource : class
         where TDestination : class, new()
     {        
@@ -23,7 +26,7 @@ namespace MyMapper.Converters
 
             return source.AsDictionary(typeof(TSource)).ToObject<TDestination>();            
         }
-
+#if !NET4
         public async Task<TDestination> ConvertAsync(TSource source)
         {
             if (source == null)
@@ -33,6 +36,6 @@ namespace MyMapper.Converters
 
             return await Task.Run(() =>source.AsDictionary(typeof(TSource)).ToObject<TDestination>());
         }
-
+#endif
     }    
 }

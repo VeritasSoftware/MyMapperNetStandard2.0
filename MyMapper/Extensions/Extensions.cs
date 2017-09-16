@@ -30,8 +30,8 @@ namespace System
                                     new MyMapper<TSource, TDestination>();
 
             return mapper.Map(obj, true).Exec();
-        }        
-
+        }
+#if !NET4
         /// <summary>
         /// MyMapper - MapAsync extension method
         /// </summary>
@@ -51,7 +51,7 @@ namespace System
 
             return await Task.Run(() => mapper.Map(obj, true).Exec());            
         }
-
+#endif
         /// <summary>
         /// MyMapper - Map extension method
         /// </summary>
@@ -81,7 +81,7 @@ namespace System
             else
                 return mapper.Exec();
         }
-
+#if !NET4
         /// <summary>
         /// MyMapper - MapAsync extension method
         /// </summary>
@@ -114,6 +114,7 @@ namespace System
                     return mapper.Exec();
             });            
         }
+#endif
     }
 }
 
@@ -160,7 +161,7 @@ namespace System.Collections.Generic
                     return mapper.Exec();
             });
         }
-
+#if !NET4
         /// <summary>
         /// MyMapper - MapAsync extension method
         /// </summary>
@@ -200,7 +201,7 @@ namespace System.Collections.Generic
                 });
             });            
         }
-
+#endif
 
         /// <summary>
         /// MyMapper - Map Parallel extension method - Uses PLINQ

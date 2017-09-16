@@ -12,7 +12,10 @@ namespace MyMapper.Converters
     /// DataRowToEntityConverter : Converts a datarow to an entity
     /// </summary>
     /// <typeparam name="TEntity">The entity</typeparam>
-    public class DataRowToEntityConverter<TEntity> : ITypeConverter<DataRow, TEntity>, ITypeConverterAsync<DataRow, TEntity>
+    public class DataRowToEntityConverter<TEntity> : ITypeConverter<DataRow, TEntity>
+#if !NET4
+                                                     ,ITypeConverterAsync<DataRow, TEntity>
+#endif
         where TEntity : class, new()
     {
         static ConcurrentDictionary<Type, List<PropertyInfo>> dictionaryEntityPropertyInfos;
@@ -66,6 +69,7 @@ namespace MyMapper.Converters
             return obj;
         }
 
+#if !NET4
         public async Task<TEntity> ConvertAsync(DataRow source)
         {
             return await Task.Run(() =>
@@ -117,5 +121,6 @@ namespace MyMapper.Converters
                 return obj;
             });
         }
+#endif
     }
 }

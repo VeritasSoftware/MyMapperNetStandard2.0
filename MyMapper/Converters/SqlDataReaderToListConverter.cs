@@ -12,7 +12,10 @@ namespace MyMapper.Converters
     /// SqlDataReader to List converter
     /// </summary>
     /// <typeparam name="TEntity">The entity</typeparam>
-    public class SqlDataReaderToListConverter<TEntity> : ITypeConverter<SqlDataReader, IList<TEntity>>, ITypeConverterAsync<SqlDataReader, IList<TEntity>>
+    public class SqlDataReaderToListConverter<TEntity> : ITypeConverter<SqlDataReader, IList<TEntity>>
+#if !NET4
+                                                            , ITypeConverterAsync<SqlDataReader, IList<TEntity>>
+#endif
         where TEntity : class, new()
     {
         static ConcurrentDictionary<Type, List<PropertyInfo>> dictionaryEntityPropertyInfos;
@@ -76,7 +79,7 @@ namespace MyMapper.Converters
 
             return list;
         }
-
+#if !NET4
         public async Task<IList<TEntity>> ConvertAsync(SqlDataReader source)
         {
             return await Task.Run(() =>
@@ -139,5 +142,6 @@ namespace MyMapper.Converters
                 return list;
             });
         }
+#endif
     }
 }

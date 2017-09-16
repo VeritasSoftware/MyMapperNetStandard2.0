@@ -106,8 +106,9 @@ namespace MyMapper
         where TDestination : class, new()
     {
         IMyMapperRules<TSource, TDestination> Map(TSource source, bool automap = true);
-
+#if !NET4
         Task<IMyMapperRules<TSource, TDestination>> MapAsync(TSource source, bool automap = true);
+#endif
 
         [Obsolete("Exec is deprecated.", true)]
         TDestination Exec(TSource source, Func<TSource, IMyMapper<TSource, TDestination>, TDestination> map);

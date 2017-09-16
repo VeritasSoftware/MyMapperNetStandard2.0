@@ -28,6 +28,7 @@ namespace MyMapper
             return mapper as IMyMapperRules<TSource, TDestination>;
         }
 
+#if !NET4
         /// <summary>
         /// Map source to destination async
         /// </summary>
@@ -43,7 +44,7 @@ namespace MyMapper
 
             return mapper as IMyMapperRules<TSource, TDestination>;
         }
-
+#endif
         [Obsolete("Exec is deprecated.", true)]
         public static TDestination Exec(TSource source, Func<TSource, IMyMapper<TSource, TDestination>, TDestination> map)
         {

@@ -41,7 +41,7 @@ namespace MyMapper
 
             return this;
         }
-
+#if !NET4
         public async Task<IMyMapperRules<TSource, TDestination>> MapAsync(TSource source, bool automap = true)
         {
             if (source == null)
@@ -55,8 +55,8 @@ namespace MyMapper
                 this.Destination = await new EntityConverter<TSource, TDestination>().ConvertAsync(this.Source);
 
             return this;
-        }        
-
+        }
+#endif
         /// <summary>
         /// With
         /// </summary>
@@ -352,11 +352,12 @@ namespace MyMapper
         {
             return this.Destination;
         }
-
+#if !NET4
         public async Task<TDestination> ExecAsync()
         {
             return await Task.Run(() => this.Destination);
         }
+#endif
 
         [Obsolete("Exec is deprecated.", true)]
         public TDestination Exec(TSource source, Func<TSource, IMyMapper<TSource, TDestination>, TDestination> map)
@@ -375,7 +376,7 @@ namespace MyMapper
         {
             return new TConverter().Convert(source);
         }
-
+#if !NET4
         /// <summary>
         /// Exec Async
         /// </summary>
@@ -387,5 +388,6 @@ namespace MyMapper
         {
             return await new TConverter().ConvertAsync(source);
         }
+#endif
     }    
 }
