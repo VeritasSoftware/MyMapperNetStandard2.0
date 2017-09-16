@@ -26,7 +26,7 @@ MyMapper mapping elapsed time milliseconds: 0<br>
 MyMapper mapping elapsed time milliseconds: 0<br>
 MyMapper mapping elapsed time milliseconds: 0<br>
 MyMapper mapping elapsed time milliseconds: 0<br>
-MyMapper average elapsed time milliseconds: 1.3
+MyMapper average elapsed time milliseconds: 1.3<br>
 Automapper...<br>
 Automapper mapping elapsed time milliseconds: 122<br>
 Automapper mapping elapsed time milliseconds: 2<br>
