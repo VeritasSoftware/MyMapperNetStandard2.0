@@ -1,5 +1,7 @@
 ﻿using System;
+#if !NET4
 using System.Threading.Tasks;
+#endif
 using MyMapper.Extensions;
 
 namespace MyMapper.Converters

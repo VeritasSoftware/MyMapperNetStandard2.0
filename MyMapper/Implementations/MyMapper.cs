@@ -5,7 +5,9 @@ using System.Linq;
 
 namespace MyMapper
 {
+#if !NET4
     using System.Threading.Tasks;
+#endif
     using MyMapper.Converters;
 
     /// <summary>
