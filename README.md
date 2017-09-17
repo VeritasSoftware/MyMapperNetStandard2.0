@@ -14,7 +14,7 @@ Codefile 00-EntitiesSampleMapper.cs contains the source and destination entities
 Features:
 
 1.	Fluent design.
-2.	Dependency injectable.
+2.	Async support. Parallel mapping support.
 3.  Ability to do auto mapping of source and destination properties (with the same name) using reflection 
 	and add maps only for properties with different names. Reflective auto mapping can be turned off too.
 4.	Ability to create multiple maps between the same source and destination types.
@@ -22,5 +22,5 @@ Features:
 6.	Conditional, Switch mapping support.
 7.	Mappings happen dynamically on source instance.
 8.	Mappings can be debugged by either setting a breakpoint or using Debugger.Break().
-9.	Parallel mapping support. Async support.
+9.	Dependency injectable.
 10.	.NET Object and IEnumerable`<T>` integration extensions. Async support.
