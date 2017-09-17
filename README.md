@@ -5,11 +5,11 @@
 **Light-weight, powerful object mapping framework. Fluent design.**
 **Supports .NET, .NET Standard 2.0 and .NET Core 2.0**
 
-Please read 00-SampleMapper.cs code file to learn how to create mappers using MyMapper framework.
+Please read SampleMapper.cs code file to learn how to create mappers using MyMapper framework.
 
-Please read 00-SampleMapper-WithExtensions.cs code file to learn how to create mappers using MyMapper framework extensions.
+Please read SampleMapper-WithExtensions.cs code file to learn how to create mappers using MyMapper framework extensions.
 
-Codefile 00-EntitiesSampleMapper.cs contains the source and destination entities used in the sample mapper.
+Codefile EntitiesSampleMapper.cs contains the source and destination entities used in the sample mapper.
 
 Features:
 
