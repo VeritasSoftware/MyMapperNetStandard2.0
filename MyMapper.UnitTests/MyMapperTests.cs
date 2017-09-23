@@ -76,7 +76,7 @@ namespace MyMapper.UnitTests
             var response3 = mapper.Map(response1);
 
             Assert.IsTrue(response3.IDNumber == response1.ConsumerID);
-            Assert.IsTrue(response3.TotalPurchases == 120);
+            Assert.IsTrue(response3.TotalPurchases == response1.AvgNoOfPurchasesPerMonth * response1.PeriodInMonths);
             Assert.IsTrue(response3.Details.DateOfBirth == response1.Details.DOB);
             Assert.IsTrue(response3.Details.IsHandicapped == response1.Details.IsDisabled);
             Assert.IsTrue(response3.InsuranceInfo.MembershipNo == response1.InsuranceEmployment.EmploymentNumber);
@@ -164,7 +164,7 @@ namespace MyMapper.UnitTests
             var response3 = await mapper.MapAsync(response1);
 
             Assert.IsTrue(response3.IDNumber == response1.ConsumerID);
-            Assert.IsTrue(response3.TotalPurchases == 120);
+            Assert.IsTrue(response3.TotalPurchases == response1.AvgNoOfPurchasesPerMonth * response1.PeriodInMonths);
             Assert.IsTrue(response3.Details.DateOfBirth == response1.Details.DOB);
             Assert.IsTrue(response3.Details.IsHandicapped == response1.Details.IsDisabled);
             Assert.IsTrue(response3.InsuranceInfo.MembershipNo == response1.InsuranceEmployment.EmploymentNumber);

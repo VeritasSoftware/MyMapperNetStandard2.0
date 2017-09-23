@@ -355,6 +355,10 @@ namespace MyMapper
             return this.Destination;
         }
 #if !NET4
+        /// <summary>
+        /// Exec Async
+        /// </summary>
+        /// <returns>The destination <see cref="Task{TDestination}"/></returns>
         public async Task<TDestination> ExecAsync()
         {
             return await Task.Run(() => this.Destination);
