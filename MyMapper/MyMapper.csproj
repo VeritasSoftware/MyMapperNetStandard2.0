@@ -15,13 +15,13 @@
 
 	<PropertyGroup>
 		<PackageId>MyMapper</PackageId>
-		<PackageVersion>2.0.0</PackageVersion>
+		<PackageVersion>2.1.0</PackageVersion>
 		<Authors>Shantanu</Authors>
 		<Description>.Net light-weight, powerful object mapping framework. Fluent design. Supports .NET, .NET Standard 2.0 and .NET Core.</Description>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 		<PackageReleaseNotes>Ported framework to .NET Standard 2.0. Further Async support.</PackageReleaseNotes>
 		<Copyright>Copyright 2017 (c) Veritas Software. All rights reserved.</Copyright>
-		<PackageTags>.Net light-weight, powerful object mapping framework. </PackageTags>
+		<PackageTags>.Net light-weight, powerful object mapping framework .net core 2.0 standard 2.0</PackageTags>
 	</PropertyGroup>
 	
   <ItemGroup Condition=" '$(TargetFrameworkVersionNumber)' == '4.5' ">
