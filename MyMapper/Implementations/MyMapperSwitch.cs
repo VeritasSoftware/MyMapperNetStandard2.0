@@ -39,27 +39,27 @@ namespace MyMapper
         }
 
         public IMyMapperSwitchElse<TSource, TDestination, TSourceProperty> CaseMap(
-                                                                                        Expression<Func<TSourceProperty, bool>> when,
+                                                                                        Func<TSourceProperty, bool> when,
                                                                                         Action<IMyMapperRules<TSource, TDestination>> then
                                                                                     )
         {
             SwitchThen<TSource, TDestination, TSourceProperty> switchThen = new SwitchThen<TSource, TDestination, TSourceProperty>();
             switchThen.CaseMap = then;
 
-            cases.Add(when.Compile(), switchThen);
+            cases.Add(when, switchThen);
 
             return this;
         }
 
         public IMyMapperSwitchElse<TSource, TDestination, TSourceProperty> Case(
-                                                                                    Expression<Func<TSourceProperty, bool>> when,
+                                                                                    Func<TSourceProperty, bool> when,
                                                                                     Action<TDestination, TSourceProperty> then
                                                                                 )
         {
             SwitchThen<TSource, TDestination, TSourceProperty> switchThen = new SwitchThen<TSource, TDestination, TSourceProperty>();
             switchThen.Case = then;
 
-            cases.Add(when.Compile(), switchThen);
+            cases.Add(when, switchThen);
 
             return this;
         }

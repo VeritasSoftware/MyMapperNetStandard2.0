@@ -13,9 +13,9 @@ namespace MyMapper
         where TSource : class
         where TDestination : class, new()
     {
-        IMyMapperSwitchElse<TSource, TDestination, TSourceProperty> CaseMap(Expression<Func<TSourceProperty, bool>> when, Action<IMyMapperRules<TSource, TDestination>> then);
+        IMyMapperSwitchElse<TSource, TDestination, TSourceProperty> CaseMap(Func<TSourceProperty, bool> when, Action<IMyMapperRules<TSource, TDestination>> then);
 
-        IMyMapperSwitchElse<TSource, TDestination, TSourceProperty> Case(Expression<Func<TSourceProperty, bool>> when, Action<TDestination, TSourceProperty> then);
+        IMyMapperSwitchElse<TSource, TDestination, TSourceProperty> Case(Func<TSourceProperty, bool> when, Action<TDestination, TSourceProperty> then);
     }
 
     /// <summary>
@@ -28,9 +28,9 @@ namespace MyMapper
         where TSource : class
         where TDestination : class, new()
     {
-        IMyMapperSwitchElse<TSource, TDestination, TSourceProperty> CaseMap(Expression<Func<TSourceProperty, bool>> when, Action<IMyMapperRules<TSource, TDestination>> then);
+        IMyMapperSwitchElse<TSource, TDestination, TSourceProperty> CaseMap(Func<TSourceProperty, bool> when, Action<IMyMapperRules<TSource, TDestination>> then);
 
-        IMyMapperSwitchElse<TSource, TDestination, TSourceProperty> Case(Expression<Func<TSourceProperty, bool>> when, Action<TDestination, TSourceProperty> then);
+        IMyMapperSwitchElse<TSource, TDestination, TSourceProperty> Case(Func<TSourceProperty, bool> when, Action<TDestination, TSourceProperty> then);
 
         IMyMapperSwitchEnd<TSource, TDestination> ElseMap(Action<IMyMapperRules<TSource, TDestination>> then);
 

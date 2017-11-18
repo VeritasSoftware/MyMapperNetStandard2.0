@@ -408,7 +408,7 @@ namespace System.Threading.Tasks
 
         public static Task<IMyMapperSwitchElse<TSource, TDestination, TSourceProperty>> Case<TSource, TDestination, TSourceProperty>(
                                                                             this Task<IMyMapperSwitch<TSource, TDestination, TSourceProperty>> task,
-                                                                            Expression<Func<TSourceProperty, bool>> when, Action<TDestination, TSourceProperty> then
+                                                                            Func<TSourceProperty, bool> when, Action<TDestination, TSourceProperty> then
                                                                         )
 
             where TSource : class
@@ -419,7 +419,7 @@ namespace System.Threading.Tasks
 
         public static Task<IMyMapperSwitchElse<TSource, TDestination, TSourceProperty>> CaseMap<TSource, TDestination, TSourceProperty>(
                                                                             this Task<IMyMapperSwitch<TSource, TDestination, TSourceProperty>> task,
-                                                                            Expression<Func<TSourceProperty, bool>> when, Action<IMyMapperRules<TSource, TDestination>> then
+                                                                            Func<TSourceProperty, bool> when, Action<IMyMapperRules<TSource, TDestination>> then
                                                                         )
 
             where TSource : class
@@ -430,7 +430,7 @@ namespace System.Threading.Tasks
 
         public static Task<IMyMapperSwitchElse<TSource, TDestination, TSourceProperty>> Case<TSource, TDestination, TSourceProperty>(
                                                                             this Task<IMyMapperSwitchElse<TSource, TDestination, TSourceProperty>> task,
-                                                                            Expression<Func<TSourceProperty, bool>> when, Action<TDestination, TSourceProperty> then
+                                                                            Func<TSourceProperty, bool> when, Action<TDestination, TSourceProperty> then
                                                                         )
 
             where TSource : class
@@ -441,7 +441,7 @@ namespace System.Threading.Tasks
 
         public static Task<IMyMapperSwitchElse<TSource, TDestination, TSourceProperty>> CaseMap<TSource, TDestination, TSourceProperty>(
                                                                             this Task<IMyMapperSwitchElse<TSource, TDestination, TSourceProperty>> task,
-                                                                            Expression<Func<TSourceProperty, bool>> when, Action<IMyMapperRules<TSource, TDestination>> then
+                                                                            Func<TSourceProperty, bool> when, Action<IMyMapperRules<TSource, TDestination>> then
                                                                         )
 
             where TSource : class
