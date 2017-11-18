@@ -359,6 +359,7 @@ namespace MyMapper
         /// Exec Async
         /// </summary>
         /// <returns>The destination <see cref="Task{TDestination}"/></returns>
+        [Obsolete("ExecAsync is deprecated.", true)]
         public async Task<TDestination> ExecAsync()
         {
             return await Task.Run(() => this.Destination);
