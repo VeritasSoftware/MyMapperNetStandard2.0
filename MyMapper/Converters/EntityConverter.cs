@@ -19,25 +19,27 @@ namespace MyMapper.Converters
         where TSource : class
         where TDestination : class, new()
     {        
-        public TDestination Convert(TSource source)
+        public TDestination Convert(TSource source, TDestination destination = null)
         {
             if (source == null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
 
-            return source.AsDictionary(typeof(TSource)).ToObject<TDestination>();            
-        }
+            return destination == null ? source.AsDictionary(typeof(TSource)).ToObject<TDestination>()
+                                       : source.AsDictionary(typeof(TSource)).ToObject<TDestination>(destination);
+        }        
 #if !NET4
-        public async Task<TDestination> ConvertAsync(TSource source)
+        public async Task<TDestination> ConvertAsync(TSource source, TDestination destination = null)
         {
             if (source == null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
 
-            return await Task.Run(() =>source.AsDictionary(typeof(TSource)).ToObject<TDestination>());
-        }
+            return await Task.Run(() => destination == null ? source.AsDictionary(typeof(TSource)).ToObject<TDestination>()
+                                       : source.AsDictionary(typeof(TSource)).ToObject<TDestination>(destination));
+        }        
 #endif
     }    
 }

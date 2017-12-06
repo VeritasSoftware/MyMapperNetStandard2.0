@@ -20,7 +20,23 @@ namespace MyMapper
         where TDestination : class, new()
     {
         TSource Source { get; set; }
-        TDestination Destination { get; set; }
+        TDestination Destination { get { return _destination; } set { _destination = value; } }
+
+        private bool _isMappingToExistingObj = false;
+        private TDestination _destination;
+
+        public MyMapper()
+        {
+
+        }
+
+        public MyMapper(TSource source, TDestination destination)
+        {
+            this.Source = source;
+
+            _destination = destination;
+            _isMappingToExistingObj = true;
+        }             
 
         /// <summary>
         /// Map source to destination
@@ -36,13 +52,23 @@ namespace MyMapper
 
             this.Source = source;
 
-            this.Destination = new TDestination();
+            if (this.Destination == null)
+                this.Destination = new TDestination();
 
             if (automap)
-                this.Destination = new EntityConverter<TSource, TDestination>().Convert(this.Source);
+            {
+                if (_isMappingToExistingObj)
+                {
+                    new EntityConverter<TSource, TDestination>().Convert(this.Source, _destination);                    
+                }
+                else
+                {
+                    this.Destination = new EntityConverter<TSource, TDestination>().Convert(this.Source);
+                }
+            }            
 
             return this;
-        }
+        }        
 #if !NET4
         public async Task<IMyMapperRules<TSource, TDestination>> MapAsync(TSource source, bool automap = true)
         {
@@ -51,10 +77,20 @@ namespace MyMapper
 
             this.Source = source;
 
-            this.Destination = new TDestination();
+            if (this.Destination == null)
+                this.Destination = new TDestination();
 
             if (automap)
-                this.Destination = await new EntityConverter<TSource, TDestination>().ConvertAsync(this.Source);
+            {
+                if (_isMappingToExistingObj)
+                {
+                    await new EntityConverter<TSource, TDestination>().ConvertAsync(this.Source, _destination);
+                }
+                else
+                {
+                    this.Destination = await new EntityConverter<TSource, TDestination>().ConvertAsync(this.Source);
+                }
+            }
 
             return this;
         }

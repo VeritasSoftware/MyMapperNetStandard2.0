@@ -20,7 +20,7 @@ namespace MyMapper.UnitTests
             Response1 response1 = new Response1
             {
                 ConsumerID = 123,
-                Name = "Shan",
+                Name = "XYZ",
                 AvgNoOfPurchasesPerMonth = 10,
                 PeriodInMonths = 12,
                 Details = new Details1()
@@ -76,6 +76,7 @@ namespace MyMapper.UnitTests
             var response3 = mapper.Map(response1);
 
             Assert.IsTrue(response3.IDNumber == response1.ConsumerID);
+            Assert.IsTrue(response3.Name == response1.Name);
             Assert.IsTrue(response3.TotalPurchases == response1.AvgNoOfPurchasesPerMonth * response1.PeriodInMonths);
             Assert.IsTrue(response3.Details.DateOfBirth == response1.Details.DOB);
             Assert.IsTrue(response3.Details.IsHandicapped == response1.Details.IsDisabled);
@@ -96,6 +97,35 @@ namespace MyMapper.UnitTests
             Assert.IsTrue(response3.BankingInformation[0].AccountNumber == response1.BankingInfos[0].AccountNo);
             Assert.IsTrue(response3.BankingInformation[1].AccountName == response1.BankingInfos[1].AccountName);
             Assert.IsTrue(response3.BankingInformation[1].AccountNumber == response1.BankingInfos[1].AccountNo);
+
+            //The mapping
+            Response3 response3_1 = new Response3() { Existing = "Mapping to existing destination object" };
+
+            mapper.Map(response1, response3_1);
+
+            Assert.IsTrue(response3_1.IDNumber == response1.ConsumerID);
+            Assert.IsTrue(response3_1.Name == response1.Name);
+            Assert.IsTrue(response3_1.Existing == "Mapping to existing destination object");
+            Assert.IsTrue(response3_1.TotalPurchases == response1.AvgNoOfPurchasesPerMonth * response1.PeriodInMonths);
+            Assert.IsTrue(response3_1.Details.DateOfBirth == response1.Details.DOB);
+            Assert.IsTrue(response3_1.Details.IsHandicapped == response1.Details.IsDisabled);
+            Assert.IsTrue(response3_1.InsuranceInfo.MembershipNo == response1.InsuranceEmployment.EmploymentNumber);
+            Assert.IsTrue(response3_1.InsuranceInfo.TaxNumber == response1.InsuranceEmployment.TaxNumber);
+            Assert.IsTrue(response3_1.Fund.BankIdNo == response1.MutualFund.BankIdNo);
+            Assert.IsTrue(response3_1.Fund.FundId == response1.MutualFund.FundId);
+            Assert.IsTrue(response3_1.Fund.Name == response1.MutualFund.Name);
+            Assert.IsTrue(response3_1.Fund.Address.StreetNo == response1.MutualFund.Address.StreetNo);
+            Assert.IsTrue(response3_1.Fund.Address.State.Name == response1.MutualFund.Address.State.Name);
+            Assert.IsTrue(response3_1.Fund.Address.State.Abbr == response1.MutualFund.Address.State.Abbr);
+            Assert.IsTrue(response3_1.Fund.Address.Country.Name == response1.MutualFund.Address.Country.Name);
+            Assert.IsTrue(response3_1.Fund.Address.Country.Abbr == response1.MutualFund.Address.Country.Abbr);
+            Assert.IsTrue(response3_1.Fund.FundKeys["ABN"] == response1.MutualFund.FundKeys["ABN"]);
+            Assert.IsTrue(response3_1.Fund.FundKeys["TFN"] == response1.MutualFund.FundKeys["TFN"]);
+            Assert.IsTrue(response3_1.BankingInformation.Count == response1.BankingInfos.Count);
+            Assert.IsTrue(response3_1.BankingInformation[0].AccountName == response1.BankingInfos[0].AccountName);
+            Assert.IsTrue(response3_1.BankingInformation[0].AccountNumber == response1.BankingInfos[0].AccountNo);
+            Assert.IsTrue(response3_1.BankingInformation[1].AccountName == response1.BankingInfos[1].AccountName);
+            Assert.IsTrue(response3_1.BankingInformation[1].AccountNumber == response1.BankingInfos[1].AccountNo);
         }
 
         [TestMethod]
@@ -108,7 +138,7 @@ namespace MyMapper.UnitTests
             Response1 response1 = new Response1
             {
                 ConsumerID = 123,
-                Name = "Shan",
+                Name = "XYZ",
                 AvgNoOfPurchasesPerMonth = 10,
                 PeriodInMonths = 12,
                 Details = new Details1()
@@ -164,6 +194,7 @@ namespace MyMapper.UnitTests
             var response3 = await mapper.MapAsync(response1);
 
             Assert.IsTrue(response3.IDNumber == response1.ConsumerID);
+            Assert.IsTrue(response3.Name == response1.Name);
             Assert.IsTrue(response3.TotalPurchases == response1.AvgNoOfPurchasesPerMonth * response1.PeriodInMonths);
             Assert.IsTrue(response3.Details.DateOfBirth == response1.Details.DOB);
             Assert.IsTrue(response3.Details.IsHandicapped == response1.Details.IsDisabled);
@@ -184,6 +215,35 @@ namespace MyMapper.UnitTests
             Assert.IsTrue(response3.BankingInformation[0].AccountNumber == response1.BankingInfos[0].AccountNo);
             Assert.IsTrue(response3.BankingInformation[1].AccountName == response1.BankingInfos[1].AccountName);
             Assert.IsTrue(response3.BankingInformation[1].AccountNumber == response1.BankingInfos[1].AccountNo);
+
+            //The mapping
+            Response3 response3_1 = new Response3() { Existing = "Mapping to existing destination object" };
+
+            await mapper.MapAsync(response1, response3_1);
+
+            Assert.IsTrue(response3_1.IDNumber == response1.ConsumerID);
+            Assert.IsTrue(response3_1.Name == response1.Name);
+            Assert.IsTrue(response3_1.Existing == "Mapping to existing destination object");
+            Assert.IsTrue(response3_1.TotalPurchases == response1.AvgNoOfPurchasesPerMonth * response1.PeriodInMonths);
+            Assert.IsTrue(response3_1.Details.DateOfBirth == response1.Details.DOB);
+            Assert.IsTrue(response3_1.Details.IsHandicapped == response1.Details.IsDisabled);
+            Assert.IsTrue(response3_1.InsuranceInfo.MembershipNo == response1.InsuranceEmployment.EmploymentNumber);
+            Assert.IsTrue(response3_1.InsuranceInfo.TaxNumber == response1.InsuranceEmployment.TaxNumber);
+            Assert.IsTrue(response3_1.Fund.BankIdNo == response1.MutualFund.BankIdNo);
+            Assert.IsTrue(response3_1.Fund.FundId == response1.MutualFund.FundId);
+            Assert.IsTrue(response3_1.Fund.Name == response1.MutualFund.Name);
+            Assert.IsTrue(response3_1.Fund.Address.StreetNo == response1.MutualFund.Address.StreetNo);
+            Assert.IsTrue(response3_1.Fund.Address.State.Name == response1.MutualFund.Address.State.Name);
+            Assert.IsTrue(response3_1.Fund.Address.State.Abbr == response1.MutualFund.Address.State.Abbr);
+            Assert.IsTrue(response3_1.Fund.Address.Country.Name == response1.MutualFund.Address.Country.Name);
+            Assert.IsTrue(response3_1.Fund.Address.Country.Abbr == response1.MutualFund.Address.Country.Abbr);
+            Assert.IsTrue(response3_1.Fund.FundKeys["ABN"] == response1.MutualFund.FundKeys["ABN"]);
+            Assert.IsTrue(response3_1.Fund.FundKeys["TFN"] == response1.MutualFund.FundKeys["TFN"]);
+            Assert.IsTrue(response3_1.BankingInformation.Count == response1.BankingInfos.Count);
+            Assert.IsTrue(response3_1.BankingInformation[0].AccountName == response1.BankingInfos[0].AccountName);
+            Assert.IsTrue(response3_1.BankingInformation[0].AccountNumber == response1.BankingInfos[0].AccountNo);
+            Assert.IsTrue(response3_1.BankingInformation[1].AccountName == response1.BankingInfos[1].AccountName);
+            Assert.IsTrue(response3_1.BankingInformation[1].AccountNumber == response1.BankingInfos[1].AccountNo);
         }
     }
 }

@@ -173,6 +173,9 @@ namespace MyMapper.UnitTests.Entities
         public string Period { get; set; }
 
         public InsuranceInfo InsuranceInfo { get; set; }
+
+        //Mapping to an existing destination object
+        public string Existing { get; set; }
     }   
     #endregion
 }

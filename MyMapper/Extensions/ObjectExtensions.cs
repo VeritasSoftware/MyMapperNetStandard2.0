@@ -138,7 +138,7 @@ namespace MyMapper.Extensions
             return dDictionary;
         }
 
-        public static T ToObject<T>(this IDictionary<string, TypeValue> source)
+        public static T ToObject<T>(this IDictionary<string, TypeValue> source, T destination = null)
             where T : class, new()
         {
             if (source == null)
@@ -146,7 +146,15 @@ namespace MyMapper.Extensions
                 return default(T);
             }
 
-            T someObject = new T();
+            T someObject;
+
+            if (destination == null)
+            {
+                someObject = new T();
+            }
+            else
+                someObject = destination;
+
             Type someObjectType = typeof(T);
 
             var destPropetyInfos = _dictionaryEntityPropertyInfos.GetOrAdd(someObjectType, someObjectType.GetProperties(BindingFlags.Public | BindingFlags.Instance).ToList());

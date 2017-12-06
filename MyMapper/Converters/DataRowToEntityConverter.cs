@@ -18,13 +18,21 @@ namespace MyMapper.Converters
 #endif
         where TEntity : class, new()
     {
-        static ConcurrentDictionary<Type, List<PropertyInfo>> dictionaryEntityPropertyInfos;
+        static ConcurrentDictionary<Type, List<PropertyInfo>> dictionaryEntityPropertyInfos;        
 
-        public TEntity Convert(DataRow source)
+        public TEntity Convert(DataRow source, TEntity entity = null)
         {
             List<PropertyInfo> entityPropertyInfos;
+            TEntity obj;
 
-            TEntity obj = new TEntity();
+            if (entity == null)
+            {
+                obj = new TEntity();
+            }
+            else
+            {
+                obj = entity;
+            }
 
             if (dictionaryEntityPropertyInfos == null)
                 dictionaryEntityPropertyInfos = new ConcurrentDictionary<Type, List<PropertyInfo>>();
@@ -67,60 +75,13 @@ namespace MyMapper.Converters
             }
 
             return obj;
-        }
+        } 
 
 #if !NET4
-        public async Task<TEntity> ConvertAsync(DataRow source)
+        public async Task<TEntity> ConvertAsync(DataRow source, TEntity entity = null)
         {
-            return await Task.Run(() =>
-            {
-                List<PropertyInfo> entityPropertyInfos;
-
-                TEntity obj = new TEntity();
-
-                if (dictionaryEntityPropertyInfos == null)
-                    dictionaryEntityPropertyInfos = new ConcurrentDictionary<Type, List<PropertyInfo>>();
-
-                if (!dictionaryEntityPropertyInfos.ContainsKey(typeof(TEntity)))
-                {
-                    entityPropertyInfos = typeof(TEntity).GetProperties(BindingFlags.Public | BindingFlags.Instance).ToList();
-
-                    dictionaryEntityPropertyInfos.GetOrAdd(typeof(TEntity), entityPropertyInfos);
-                }
-                else
-                {
-                    dictionaryEntityPropertyInfos.TryGetValue(typeof(TEntity), out entityPropertyInfos);
-                }
-
-                foreach (PropertyInfo propertyInfo in entityPropertyInfos)
-                {
-                    object rowVal = null;
-
-                    try
-                    {
-                        rowVal = source[propertyInfo.Name];
-                    }
-                    catch (Exception)
-                    {
-                        continue;
-                    }
-
-                    if (propertyInfo != null && propertyInfo.CanWrite)
-                    {
-                        try
-                        {
-                            object value = System.Convert.ChangeType(rowVal, propertyInfo.PropertyType);
-                            propertyInfo.SetValue(obj, value, null);
-                        }
-                        catch (Exception)
-                        {
-                        }
-                    }
-                }
-
-                return obj;
-            });
-        }
+            return await Task.Run(() => Convert(source, entity));
+        }        
 #endif
     }
 }
