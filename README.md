@@ -24,3 +24,4 @@ Features:
 8.	Ability to harness other maps. Other mappers can be chained as required.
 9.	Dependency injectable.
 10.	.NET Object and IEnumerable`<T>` integration extensions. Async support.
+11.	Feature to map source to existing destination object.
