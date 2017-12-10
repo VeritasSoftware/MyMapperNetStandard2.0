@@ -59,7 +59,9 @@ namespace MyMapper
             {
                 if (_isMappingToExistingObj)
                 {
-                    new EntityConverter<TSource, TDestination>().Convert(this.Source, _destination);                    
+                    new EntityConverter<TSource, TDestination>().Convert(this.Source, _destination);
+
+                    _isMappingToExistingObj = false;
                 }
                 else
                 {
