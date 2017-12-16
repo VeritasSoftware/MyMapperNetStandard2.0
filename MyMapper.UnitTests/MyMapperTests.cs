@@ -72,7 +72,7 @@ namespace MyMapper.UnitTests
                 }
             };
 
-            //The mapping
+            //Mapping source to new destination
             var response3 = mapper.Map(response1);
 
             Assert.IsTrue(response3.IDNumber == response1.ConsumerID);
@@ -98,7 +98,7 @@ namespace MyMapper.UnitTests
             Assert.IsTrue(response3.BankingInformation[1].AccountName == response1.BankingInfos[1].AccountName);
             Assert.IsTrue(response3.BankingInformation[1].AccountNumber == response1.BankingInfos[1].AccountNo);
 
-            //The mapping
+            //Mapping source to existing destination
             Response3 response3_1 = new Response3() { Existing = "Mapping to existing destination object" };
 
             mapper.Map(response1, response3_1);
@@ -127,7 +127,7 @@ namespace MyMapper.UnitTests
             Assert.IsTrue(response3_1.BankingInformation[1].AccountName == response1.BankingInfos[1].AccountName);
             Assert.IsTrue(response3_1.BankingInformation[1].AccountNumber == response1.BankingInfos[1].AccountNo);
 
-            //Test mapping to source to destination (this)
+            //Mapping source to existing destination (this)
             Response4 response4 = new Response4() { IDNumber = "XYZ" };
 
             Response5 response5 = new Response5();
@@ -199,7 +199,7 @@ namespace MyMapper.UnitTests
                 }
             };
 
-            //The mapping
+            //Mapping source to new destination
             var response3 = await mapper.MapAsync(response1);
 
             Assert.IsTrue(response3.IDNumber == response1.ConsumerID);
@@ -225,7 +225,7 @@ namespace MyMapper.UnitTests
             Assert.IsTrue(response3.BankingInformation[1].AccountName == response1.BankingInfos[1].AccountName);
             Assert.IsTrue(response3.BankingInformation[1].AccountNumber == response1.BankingInfos[1].AccountNo);
 
-            //The mapping
+            //Mapping source to existing destination
             Response3 response3_1 = new Response3() { Existing = "Mapping to existing destination object" };
 
             await mapper.MapAsync(response1, response3_1);
@@ -254,7 +254,7 @@ namespace MyMapper.UnitTests
             Assert.IsTrue(response3_1.BankingInformation[1].AccountName == response1.BankingInfos[1].AccountName);
             Assert.IsTrue(response3_1.BankingInformation[1].AccountNumber == response1.BankingInfos[1].AccountNo);
 
-            //Test mapping to source to destination (this)
+            //Mapping source to existing destination (this)
             Response4 response4 = new Response4() { IDNumber = "XYZ" };
 
             Response5 response5 = new Response5();
