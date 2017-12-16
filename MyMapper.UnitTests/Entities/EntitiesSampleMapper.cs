@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace MyMapper.UnitTests.Entities
 {
@@ -175,7 +174,27 @@ namespace MyMapper.UnitTests.Entities
         public InsuranceInfo InsuranceInfo { get; set; }
 
         //Mapping to an existing destination object
-        public string Existing { get; set; }
+        public string Existing { get; set; }        
     }   
     #endregion
+
+    public class Response4
+    {
+        public string IDNumber { get; set; }
+    }
+
+    public class Response5
+    {
+        public string IDNumber { get; set; }             
+
+        public void Map(Response4 response4)
+        {
+            Mapper<Response4, Response5>.Map(response4, this).Exec();
+        }
+
+        public async Task MapAsync(Response4 response4)
+        {
+            await Mapper<Response4, Response5>.MapAsync(response4, this).Exec();
+        }
+    }
 }
