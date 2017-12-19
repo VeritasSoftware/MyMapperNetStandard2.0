@@ -181,20 +181,28 @@ namespace MyMapper.UnitTests.Entities
     public class Response4
     {
         public string IDNumber { get; set; }
+
+        public string AccountNumber { get; set; }
     }
 
     public class Response5
     {
-        public string IDNumber { get; set; }             
+        public string IDNumber { get; set; }   
+        
+        public string AccNo { get; set; }
 
         public void Map(Response4 response4)
         {
-            Mapper<Response4, Response5>.Map(response4, this).Exec();
+            Mapper<Response4, Response5>.Map(response4, this)
+                                            .With(s => s.AccountNumber, (d, accountNo) => d.AccNo = accountNo)
+                                        .Exec();
         }
 
         public async Task MapAsync(Response4 response4)
         {
-            await Mapper<Response4, Response5>.MapAsync(response4, this).Exec();
+            await Mapper<Response4, Response5>.MapAsync(response4, this)
+                                                .With(s => s.AccountNumber, (d, accountNo) => d.AccNo = accountNo)
+                                              .Exec();
         }
     }
 }

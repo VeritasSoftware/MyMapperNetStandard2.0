@@ -128,13 +128,14 @@ namespace MyMapper.UnitTests
             Assert.IsTrue(response3_1.BankingInformation[1].AccountNumber == response1.BankingInfos[1].AccountNo);
 
             //Mapping source to existing destination (this)
-            Response4 response4 = new Response4() { IDNumber = "XYZ" };
+            Response4 response4 = new Response4() { IDNumber = "XYZ", AccountNumber = "123" };
 
             Response5 response5 = new Response5();
 
             response5.Map(response4);
 
             Assert.IsTrue(response5.IDNumber == response4.IDNumber);
+            Assert.IsTrue(response5.AccNo == response4.AccountNumber);
         }
 
         [TestMethod]
@@ -255,13 +256,14 @@ namespace MyMapper.UnitTests
             Assert.IsTrue(response3_1.BankingInformation[1].AccountNumber == response1.BankingInfos[1].AccountNo);
 
             //Mapping source to existing destination (this)
-            Response4 response4 = new Response4() { IDNumber = "XYZ" };
+            Response4 response4 = new Response4() { IDNumber = "XYZ", AccountNumber = "123" };
 
             Response5 response5 = new Response5();
 
             await response5.MapAsync(response4);
 
             Assert.IsTrue(response5.IDNumber == response4.IDNumber);
+            Assert.IsTrue(response5.AccNo == response4.AccountNumber);
         }
     }
 }
