@@ -17,7 +17,7 @@ namespace MyMapper.UnitTests
 
             IResponseMapper mapper = new ResponseMapper();
 
-            Response1 response1 = new Response1
+            Response1 source = new Response1
             {
                 ConsumerID = 123,
                 Name = "XYZ",
@@ -73,69 +73,69 @@ namespace MyMapper.UnitTests
             };
 
             //Mapping source to new destination
-            var response3 = mapper.Map(response1);
+            var destination = mapper.Map(source);
 
-            Assert.IsTrue(response3.IDNumber == response1.ConsumerID);
-            Assert.IsTrue(response3.Name == response1.Name);
-            Assert.IsTrue(response3.TotalPurchases == response1.AvgNoOfPurchasesPerMonth * response1.PeriodInMonths);
-            Assert.IsTrue(response3.Details.DateOfBirth == response1.Details.DOB);
-            Assert.IsTrue(response3.Details.IsHandicapped == response1.Details.IsDisabled);
-            Assert.IsTrue(response3.InsuranceInfo.MembershipNo == response1.InsuranceEmployment.EmploymentNumber);
-            Assert.IsTrue(response3.InsuranceInfo.TaxNumber == response1.InsuranceEmployment.TaxNumber);
-            Assert.IsTrue(response3.Fund.BankIdNo == response1.MutualFund.BankIdNo);
-            Assert.IsTrue(response3.Fund.FundId == response1.MutualFund.FundId);
-            Assert.IsTrue(response3.Fund.Name == response1.MutualFund.Name);
-            Assert.IsTrue(response3.Fund.Address.StreetNo == response1.MutualFund.Address.StreetNo);
-            Assert.IsTrue(response3.Fund.Address.State.Name == response1.MutualFund.Address.State.Name);
-            Assert.IsTrue(response3.Fund.Address.State.Abbr == response1.MutualFund.Address.State.Abbr);
-            Assert.IsTrue(response3.Fund.Address.Country.Name == response1.MutualFund.Address.Country.Name);
-            Assert.IsTrue(response3.Fund.Address.Country.Abbr == response1.MutualFund.Address.Country.Abbr);
-            Assert.IsTrue(response3.Fund.FundKeys["ABN"] == response1.MutualFund.FundKeys["ABN"]);
-            Assert.IsTrue(response3.Fund.FundKeys["TFN"] == response1.MutualFund.FundKeys["TFN"]);
-            Assert.IsTrue(response3.BankingInformation.Count == response1.BankingInfos.Count);
-            Assert.IsTrue(response3.BankingInformation[0].AccountName == response1.BankingInfos[0].AccountName);
-            Assert.IsTrue(response3.BankingInformation[0].AccountNumber == response1.BankingInfos[0].AccountNo);
-            Assert.IsTrue(response3.BankingInformation[1].AccountName == response1.BankingInfos[1].AccountName);
-            Assert.IsTrue(response3.BankingInformation[1].AccountNumber == response1.BankingInfos[1].AccountNo);
+            Assert.IsTrue(destination.IDNumber == source.ConsumerID);
+            Assert.IsTrue(destination.Name == source.Name);
+            Assert.IsTrue(destination.TotalPurchases == source.AvgNoOfPurchasesPerMonth * source.PeriodInMonths);
+            Assert.IsTrue(destination.Details.DateOfBirth == source.Details.DOB);
+            Assert.IsTrue(destination.Details.IsHandicapped == source.Details.IsDisabled);
+            Assert.IsTrue(destination.InsuranceInfo.MembershipNo == source.InsuranceEmployment.EmploymentNumber);
+            Assert.IsTrue(destination.InsuranceInfo.TaxNumber == source.InsuranceEmployment.TaxNumber);
+            Assert.IsTrue(destination.Fund.BankIdNo == source.MutualFund.BankIdNo);
+            Assert.IsTrue(destination.Fund.FundId == source.MutualFund.FundId);
+            Assert.IsTrue(destination.Fund.Name == source.MutualFund.Name);
+            Assert.IsTrue(destination.Fund.Address.StreetNo == source.MutualFund.Address.StreetNo);
+            Assert.IsTrue(destination.Fund.Address.State.Name == source.MutualFund.Address.State.Name);
+            Assert.IsTrue(destination.Fund.Address.State.Abbr == source.MutualFund.Address.State.Abbr);
+            Assert.IsTrue(destination.Fund.Address.Country.Name == source.MutualFund.Address.Country.Name);
+            Assert.IsTrue(destination.Fund.Address.Country.Abbr == source.MutualFund.Address.Country.Abbr);
+            Assert.IsTrue(destination.Fund.FundKeys["ABN"] == source.MutualFund.FundKeys["ABN"]);
+            Assert.IsTrue(destination.Fund.FundKeys["TFN"] == source.MutualFund.FundKeys["TFN"]);
+            Assert.IsTrue(destination.BankingInformation.Count == source.BankingInfos.Count);
+            Assert.IsTrue(destination.BankingInformation[0].AccountName == source.BankingInfos[0].AccountName);
+            Assert.IsTrue(destination.BankingInformation[0].AccountNumber == source.BankingInfos[0].AccountNo);
+            Assert.IsTrue(destination.BankingInformation[1].AccountName == source.BankingInfos[1].AccountName);
+            Assert.IsTrue(destination.BankingInformation[1].AccountNumber == source.BankingInfos[1].AccountNo);
 
             //Mapping source to existing destination
-            Response3 response3_1 = new Response3() { Existing = "Mapping to existing destination object" };
+            Response3 destination_1 = new Response3() { Existing = "Mapping to existing destination object" };
 
-            mapper.Map(response1, response3_1);
+            mapper.Map(source, destination_1);
 
-            Assert.IsTrue(response3_1.IDNumber == response1.ConsumerID);
-            Assert.IsTrue(response3_1.Name == response1.Name);
-            Assert.IsTrue(response3_1.Existing == "Mapping to existing destination object");
-            Assert.IsTrue(response3_1.TotalPurchases == response1.AvgNoOfPurchasesPerMonth * response1.PeriodInMonths);
-            Assert.IsTrue(response3_1.Details.DateOfBirth == response1.Details.DOB);
-            Assert.IsTrue(response3_1.Details.IsHandicapped == response1.Details.IsDisabled);
-            Assert.IsTrue(response3_1.InsuranceInfo.MembershipNo == response1.InsuranceEmployment.EmploymentNumber);
-            Assert.IsTrue(response3_1.InsuranceInfo.TaxNumber == response1.InsuranceEmployment.TaxNumber);
-            Assert.IsTrue(response3_1.Fund.BankIdNo == response1.MutualFund.BankIdNo);
-            Assert.IsTrue(response3_1.Fund.FundId == response1.MutualFund.FundId);
-            Assert.IsTrue(response3_1.Fund.Name == response1.MutualFund.Name);
-            Assert.IsTrue(response3_1.Fund.Address.StreetNo == response1.MutualFund.Address.StreetNo);
-            Assert.IsTrue(response3_1.Fund.Address.State.Name == response1.MutualFund.Address.State.Name);
-            Assert.IsTrue(response3_1.Fund.Address.State.Abbr == response1.MutualFund.Address.State.Abbr);
-            Assert.IsTrue(response3_1.Fund.Address.Country.Name == response1.MutualFund.Address.Country.Name);
-            Assert.IsTrue(response3_1.Fund.Address.Country.Abbr == response1.MutualFund.Address.Country.Abbr);
-            Assert.IsTrue(response3_1.Fund.FundKeys["ABN"] == response1.MutualFund.FundKeys["ABN"]);
-            Assert.IsTrue(response3_1.Fund.FundKeys["TFN"] == response1.MutualFund.FundKeys["TFN"]);
-            Assert.IsTrue(response3_1.BankingInformation.Count == response1.BankingInfos.Count);
-            Assert.IsTrue(response3_1.BankingInformation[0].AccountName == response1.BankingInfos[0].AccountName);
-            Assert.IsTrue(response3_1.BankingInformation[0].AccountNumber == response1.BankingInfos[0].AccountNo);
-            Assert.IsTrue(response3_1.BankingInformation[1].AccountName == response1.BankingInfos[1].AccountName);
-            Assert.IsTrue(response3_1.BankingInformation[1].AccountNumber == response1.BankingInfos[1].AccountNo);
+            Assert.IsTrue(destination_1.IDNumber == source.ConsumerID);
+            Assert.IsTrue(destination_1.Name == source.Name);
+            Assert.IsTrue(destination_1.Existing == "Mapping to existing destination object");
+            Assert.IsTrue(destination_1.TotalPurchases == source.AvgNoOfPurchasesPerMonth * source.PeriodInMonths);
+            Assert.IsTrue(destination_1.Details.DateOfBirth == source.Details.DOB);
+            Assert.IsTrue(destination_1.Details.IsHandicapped == source.Details.IsDisabled);
+            Assert.IsTrue(destination_1.InsuranceInfo.MembershipNo == source.InsuranceEmployment.EmploymentNumber);
+            Assert.IsTrue(destination_1.InsuranceInfo.TaxNumber == source.InsuranceEmployment.TaxNumber);
+            Assert.IsTrue(destination_1.Fund.BankIdNo == source.MutualFund.BankIdNo);
+            Assert.IsTrue(destination_1.Fund.FundId == source.MutualFund.FundId);
+            Assert.IsTrue(destination_1.Fund.Name == source.MutualFund.Name);
+            Assert.IsTrue(destination_1.Fund.Address.StreetNo == source.MutualFund.Address.StreetNo);
+            Assert.IsTrue(destination_1.Fund.Address.State.Name == source.MutualFund.Address.State.Name);
+            Assert.IsTrue(destination_1.Fund.Address.State.Abbr == source.MutualFund.Address.State.Abbr);
+            Assert.IsTrue(destination_1.Fund.Address.Country.Name == source.MutualFund.Address.Country.Name);
+            Assert.IsTrue(destination_1.Fund.Address.Country.Abbr == source.MutualFund.Address.Country.Abbr);
+            Assert.IsTrue(destination_1.Fund.FundKeys["ABN"] == source.MutualFund.FundKeys["ABN"]);
+            Assert.IsTrue(destination_1.Fund.FundKeys["TFN"] == source.MutualFund.FundKeys["TFN"]);
+            Assert.IsTrue(destination_1.BankingInformation.Count == source.BankingInfos.Count);
+            Assert.IsTrue(destination_1.BankingInformation[0].AccountName == source.BankingInfos[0].AccountName);
+            Assert.IsTrue(destination_1.BankingInformation[0].AccountNumber == source.BankingInfos[0].AccountNo);
+            Assert.IsTrue(destination_1.BankingInformation[1].AccountName == source.BankingInfos[1].AccountName);
+            Assert.IsTrue(destination_1.BankingInformation[1].AccountNumber == source.BankingInfos[1].AccountNo);
 
             //Mapping source to existing destination (this)
-            Response4 response4 = new Response4() { IDNumber = "XYZ", AccountNumber = "123" };
+            Response4 source_2 = new Response4() { IDNumber = "XYZ", AccountNumber = "123" };
 
-            Response5 response5 = new Response5();
+            Response5 destination_2 = new Response5();
 
-            response5.Map(response4);
+            destination_2.Map(source_2);
 
-            Assert.IsTrue(response5.IDNumber == response4.IDNumber);
-            Assert.IsTrue(response5.AccNo == response4.AccountNumber);
+            Assert.IsTrue(destination_2.IDNumber == source_2.IDNumber);
+            Assert.IsTrue(destination_2.AccNo == source_2.AccountNumber);
         }
 
         [TestMethod]
@@ -145,7 +145,7 @@ namespace MyMapper.UnitTests
 
             IResponseMapper mapper = new ResponseMapper();
 
-            Response1 response1 = new Response1
+            Response1 source = new Response1
             {
                 ConsumerID = 123,
                 Name = "XYZ",
@@ -201,69 +201,69 @@ namespace MyMapper.UnitTests
             };
 
             //Mapping source to new destination
-            var response3 = await mapper.MapAsync(response1);
+            var destination = await mapper.MapAsync(source);
 
-            Assert.IsTrue(response3.IDNumber == response1.ConsumerID);
-            Assert.IsTrue(response3.Name == response1.Name);
-            Assert.IsTrue(response3.TotalPurchases == response1.AvgNoOfPurchasesPerMonth * response1.PeriodInMonths);
-            Assert.IsTrue(response3.Details.DateOfBirth == response1.Details.DOB);
-            Assert.IsTrue(response3.Details.IsHandicapped == response1.Details.IsDisabled);
-            Assert.IsTrue(response3.InsuranceInfo.MembershipNo == response1.InsuranceEmployment.EmploymentNumber);
-            Assert.IsTrue(response3.InsuranceInfo.TaxNumber == response1.InsuranceEmployment.TaxNumber);
-            Assert.IsTrue(response3.Fund.BankIdNo == response1.MutualFund.BankIdNo);
-            Assert.IsTrue(response3.Fund.FundId == response1.MutualFund.FundId);
-            Assert.IsTrue(response3.Fund.Name == response1.MutualFund.Name);
-            Assert.IsTrue(response3.Fund.Address.StreetNo == response1.MutualFund.Address.StreetNo);
-            Assert.IsTrue(response3.Fund.Address.State.Name == response1.MutualFund.Address.State.Name);
-            Assert.IsTrue(response3.Fund.Address.State.Abbr == response1.MutualFund.Address.State.Abbr);
-            Assert.IsTrue(response3.Fund.Address.Country.Name == response1.MutualFund.Address.Country.Name);
-            Assert.IsTrue(response3.Fund.Address.Country.Abbr == response1.MutualFund.Address.Country.Abbr);
-            Assert.IsTrue(response3.Fund.FundKeys["ABN"] == response1.MutualFund.FundKeys["ABN"]);
-            Assert.IsTrue(response3.Fund.FundKeys["TFN"] == response1.MutualFund.FundKeys["TFN"]);
-            Assert.IsTrue(response3.BankingInformation.Count == response1.BankingInfos.Count);
-            Assert.IsTrue(response3.BankingInformation[0].AccountName == response1.BankingInfos[0].AccountName);
-            Assert.IsTrue(response3.BankingInformation[0].AccountNumber == response1.BankingInfos[0].AccountNo);
-            Assert.IsTrue(response3.BankingInformation[1].AccountName == response1.BankingInfos[1].AccountName);
-            Assert.IsTrue(response3.BankingInformation[1].AccountNumber == response1.BankingInfos[1].AccountNo);
+            Assert.IsTrue(destination.IDNumber == source.ConsumerID);
+            Assert.IsTrue(destination.Name == source.Name);
+            Assert.IsTrue(destination.TotalPurchases == source.AvgNoOfPurchasesPerMonth * source.PeriodInMonths);
+            Assert.IsTrue(destination.Details.DateOfBirth == source.Details.DOB);
+            Assert.IsTrue(destination.Details.IsHandicapped == source.Details.IsDisabled);
+            Assert.IsTrue(destination.InsuranceInfo.MembershipNo == source.InsuranceEmployment.EmploymentNumber);
+            Assert.IsTrue(destination.InsuranceInfo.TaxNumber == source.InsuranceEmployment.TaxNumber);
+            Assert.IsTrue(destination.Fund.BankIdNo == source.MutualFund.BankIdNo);
+            Assert.IsTrue(destination.Fund.FundId == source.MutualFund.FundId);
+            Assert.IsTrue(destination.Fund.Name == source.MutualFund.Name);
+            Assert.IsTrue(destination.Fund.Address.StreetNo == source.MutualFund.Address.StreetNo);
+            Assert.IsTrue(destination.Fund.Address.State.Name == source.MutualFund.Address.State.Name);
+            Assert.IsTrue(destination.Fund.Address.State.Abbr == source.MutualFund.Address.State.Abbr);
+            Assert.IsTrue(destination.Fund.Address.Country.Name == source.MutualFund.Address.Country.Name);
+            Assert.IsTrue(destination.Fund.Address.Country.Abbr == source.MutualFund.Address.Country.Abbr);
+            Assert.IsTrue(destination.Fund.FundKeys["ABN"] == source.MutualFund.FundKeys["ABN"]);
+            Assert.IsTrue(destination.Fund.FundKeys["TFN"] == source.MutualFund.FundKeys["TFN"]);
+            Assert.IsTrue(destination.BankingInformation.Count == source.BankingInfos.Count);
+            Assert.IsTrue(destination.BankingInformation[0].AccountName == source.BankingInfos[0].AccountName);
+            Assert.IsTrue(destination.BankingInformation[0].AccountNumber == source.BankingInfos[0].AccountNo);
+            Assert.IsTrue(destination.BankingInformation[1].AccountName == source.BankingInfos[1].AccountName);
+            Assert.IsTrue(destination.BankingInformation[1].AccountNumber == source.BankingInfos[1].AccountNo);
 
             //Mapping source to existing destination
-            Response3 response3_1 = new Response3() { Existing = "Mapping to existing destination object" };
+            Response3 destination_1 = new Response3() { Existing = "Mapping to existing destination object" };
 
-            await mapper.MapAsync(response1, response3_1);
+            await mapper.MapAsync(source, destination_1);
 
-            Assert.IsTrue(response3_1.IDNumber == response1.ConsumerID);
-            Assert.IsTrue(response3_1.Name == response1.Name);
-            Assert.IsTrue(response3_1.Existing == "Mapping to existing destination object");
-            Assert.IsTrue(response3_1.TotalPurchases == response1.AvgNoOfPurchasesPerMonth * response1.PeriodInMonths);
-            Assert.IsTrue(response3_1.Details.DateOfBirth == response1.Details.DOB);
-            Assert.IsTrue(response3_1.Details.IsHandicapped == response1.Details.IsDisabled);
-            Assert.IsTrue(response3_1.InsuranceInfo.MembershipNo == response1.InsuranceEmployment.EmploymentNumber);
-            Assert.IsTrue(response3_1.InsuranceInfo.TaxNumber == response1.InsuranceEmployment.TaxNumber);
-            Assert.IsTrue(response3_1.Fund.BankIdNo == response1.MutualFund.BankIdNo);
-            Assert.IsTrue(response3_1.Fund.FundId == response1.MutualFund.FundId);
-            Assert.IsTrue(response3_1.Fund.Name == response1.MutualFund.Name);
-            Assert.IsTrue(response3_1.Fund.Address.StreetNo == response1.MutualFund.Address.StreetNo);
-            Assert.IsTrue(response3_1.Fund.Address.State.Name == response1.MutualFund.Address.State.Name);
-            Assert.IsTrue(response3_1.Fund.Address.State.Abbr == response1.MutualFund.Address.State.Abbr);
-            Assert.IsTrue(response3_1.Fund.Address.Country.Name == response1.MutualFund.Address.Country.Name);
-            Assert.IsTrue(response3_1.Fund.Address.Country.Abbr == response1.MutualFund.Address.Country.Abbr);
-            Assert.IsTrue(response3_1.Fund.FundKeys["ABN"] == response1.MutualFund.FundKeys["ABN"]);
-            Assert.IsTrue(response3_1.Fund.FundKeys["TFN"] == response1.MutualFund.FundKeys["TFN"]);
-            Assert.IsTrue(response3_1.BankingInformation.Count == response1.BankingInfos.Count);
-            Assert.IsTrue(response3_1.BankingInformation[0].AccountName == response1.BankingInfos[0].AccountName);
-            Assert.IsTrue(response3_1.BankingInformation[0].AccountNumber == response1.BankingInfos[0].AccountNo);
-            Assert.IsTrue(response3_1.BankingInformation[1].AccountName == response1.BankingInfos[1].AccountName);
-            Assert.IsTrue(response3_1.BankingInformation[1].AccountNumber == response1.BankingInfos[1].AccountNo);
+            Assert.IsTrue(destination_1.IDNumber == source.ConsumerID);
+            Assert.IsTrue(destination_1.Name == source.Name);
+            Assert.IsTrue(destination_1.Existing == "Mapping to existing destination object");
+            Assert.IsTrue(destination_1.TotalPurchases == source.AvgNoOfPurchasesPerMonth * source.PeriodInMonths);
+            Assert.IsTrue(destination_1.Details.DateOfBirth == source.Details.DOB);
+            Assert.IsTrue(destination_1.Details.IsHandicapped == source.Details.IsDisabled);
+            Assert.IsTrue(destination_1.InsuranceInfo.MembershipNo == source.InsuranceEmployment.EmploymentNumber);
+            Assert.IsTrue(destination_1.InsuranceInfo.TaxNumber == source.InsuranceEmployment.TaxNumber);
+            Assert.IsTrue(destination_1.Fund.BankIdNo == source.MutualFund.BankIdNo);
+            Assert.IsTrue(destination_1.Fund.FundId == source.MutualFund.FundId);
+            Assert.IsTrue(destination_1.Fund.Name == source.MutualFund.Name);
+            Assert.IsTrue(destination_1.Fund.Address.StreetNo == source.MutualFund.Address.StreetNo);
+            Assert.IsTrue(destination_1.Fund.Address.State.Name == source.MutualFund.Address.State.Name);
+            Assert.IsTrue(destination_1.Fund.Address.State.Abbr == source.MutualFund.Address.State.Abbr);
+            Assert.IsTrue(destination_1.Fund.Address.Country.Name == source.MutualFund.Address.Country.Name);
+            Assert.IsTrue(destination_1.Fund.Address.Country.Abbr == source.MutualFund.Address.Country.Abbr);
+            Assert.IsTrue(destination_1.Fund.FundKeys["ABN"] == source.MutualFund.FundKeys["ABN"]);
+            Assert.IsTrue(destination_1.Fund.FundKeys["TFN"] == source.MutualFund.FundKeys["TFN"]);
+            Assert.IsTrue(destination_1.BankingInformation.Count == source.BankingInfos.Count);
+            Assert.IsTrue(destination_1.BankingInformation[0].AccountName == source.BankingInfos[0].AccountName);
+            Assert.IsTrue(destination_1.BankingInformation[0].AccountNumber == source.BankingInfos[0].AccountNo);
+            Assert.IsTrue(destination_1.BankingInformation[1].AccountName == source.BankingInfos[1].AccountName);
+            Assert.IsTrue(destination_1.BankingInformation[1].AccountNumber == source.BankingInfos[1].AccountNo);
 
             //Mapping source to existing destination (this)
-            Response4 response4 = new Response4() { IDNumber = "XYZ", AccountNumber = "123" };
+            Response4 source_2 = new Response4() { IDNumber = "XYZ", AccountNumber = "123" };
 
-            Response5 response5 = new Response5();
+            Response5 destination_2 = new Response5();
 
-            await response5.MapAsync(response4);
+            await destination_2.MapAsync(source_2);
 
-            Assert.IsTrue(response5.IDNumber == response4.IDNumber);
-            Assert.IsTrue(response5.AccNo == response4.AccountNumber);
+            Assert.IsTrue(destination_2.IDNumber == source_2.IDNumber);
+            Assert.IsTrue(destination_2.AccNo == source_2.AccountNumber);
         }
     }
 }
