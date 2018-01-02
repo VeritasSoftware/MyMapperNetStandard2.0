@@ -145,13 +145,14 @@ namespace System.Collections.Generic
             if (source == null)
                 return null;
 
-            IMyMapper<TSourceList, TDestinationList> mapper = 
-                                    new MyMapper<TSourceList, TDestinationList>();
+            IMyMapper<TSourceList, TDestinationList> mapper;
 
             return source.Select(src =>
             {
                 if (src == null)
                     return null;
+
+                mapper = new MyMapper<TSourceList, TDestinationList>();
 
                 mapper.Map(src, automap);
 
@@ -182,8 +183,7 @@ namespace System.Collections.Generic
             if (source == null)
                 return null;
 
-            IMyMapper<TSourceList, TDestinationList> mapper =
-                                    new MyMapper<TSourceList, TDestinationList>();
+            IMyMapper<TSourceList, TDestinationList> mapper;
 
             return await Task.Run(() =>
             {
@@ -191,6 +191,8 @@ namespace System.Collections.Generic
                 {
                     if (src == null)
                         return null;
+
+                    mapper = new MyMapper<TSourceList, TDestinationList>();
 
                     mapper.Map(src, automap);
 
