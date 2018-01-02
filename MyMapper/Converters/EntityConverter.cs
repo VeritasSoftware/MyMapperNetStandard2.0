@@ -37,8 +37,7 @@ namespace MyMapper.Converters
                 throw new ArgumentNullException(nameof(source));
             }
 
-            return await Task.Run(() => destination == null ? source.AsDictionary(typeof(TSource)).ToObject<TDestination>()
-                                       : source.AsDictionary(typeof(TSource)).ToObject<TDestination>(destination));
+            return await Task.Run(() => this.Convert(source, destination));
         }        
 #endif
     }    
