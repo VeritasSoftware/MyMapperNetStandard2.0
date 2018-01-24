@@ -5,7 +5,7 @@
 **Light-weight, powerful object mapping framework. Fluent design.**
 **Supports .NET, .NET Standard 2.0 and .NET Core 2.0**
 
-.NET Fiddle: **https://dotnetfiddle.net/1WB7py**
+[**.NET Fiddle demo**](https://dotnetfiddle.net/1WB7py)
 
 Please read SampleMapper.cs code file to learn how to create mappers using MyMapper framework.
 
