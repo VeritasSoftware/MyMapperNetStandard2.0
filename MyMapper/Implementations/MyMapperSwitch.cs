@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 
 namespace MyMapper
 {
     internal class SwitchThen<TSource, TDestination, TSourceProperty>
-    where TSource : class
-    where TDestination : class, new()
+        where TSource : class
+        where TDestination : class, new()
     {
         public Action<TDestination, TSourceProperty> Case { get; set; }
         public Action<IMyMapperRules<TSource, TDestination>> CaseMap { get; set; }
@@ -90,9 +89,9 @@ namespace MyMapper
                     {
                         theCase.Case(this.Mapper.Exec(), this.Property);
                     }
-                    else if (theCase.CaseMap != null)
+                    else
                     {
-                        theCase.CaseMap(this.Mapper);
+                        theCase.CaseMap?.Invoke(this.Mapper);
                     }
 
                     return this.Mapper;
@@ -103,9 +102,9 @@ namespace MyMapper
             {
                 ElseThen(this.Mapper.Exec(), this.Property);
             }
-            else if (ElseThenMap != null)
+            else
             {
-                ElseThenMap(this.Mapper);
+                ElseThenMap?.Invoke(this.Mapper);
             }
 
             return this.Mapper;

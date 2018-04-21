@@ -97,6 +97,8 @@ namespace MyMapper.UnitTests.Entities
         public InsuranceEmployment InsuranceEmployment { get; set; }
 
         public InsuranceType InsuranceType { get; set; }
+
+        public Dictionary<string, string> EmploymentCodes { get; set; }
     }
     #endregion
 
@@ -174,7 +176,9 @@ namespace MyMapper.UnitTests.Entities
         public InsuranceInfo InsuranceInfo { get; set; }
 
         //Mapping to an existing destination object
-        public string Existing { get; set; }        
+        public string Existing { get; set; }
+
+        public Dictionary<string, string> LabourCodes { get; set; }
     }   
     #endregion
 

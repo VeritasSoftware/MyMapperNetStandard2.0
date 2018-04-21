@@ -27,7 +27,7 @@ namespace MyMapper.Converters
             }
 
             return destination == null ? source.AsDictionary(typeof(TSource)).ToObject<TDestination>()
-                                       : source.AsDictionary(typeof(TSource)).ToObject<TDestination>(destination);
+                                       : source.AsDictionary(typeof(TSource)).ToObject(destination);
         }        
 #if !NET4
         public async Task<TDestination> ConvertAsync(TSource source, TDestination destination = null)

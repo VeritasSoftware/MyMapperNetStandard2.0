@@ -36,14 +36,14 @@ namespace MyMapper
 
             _destination = destination;
             _isMappingToExistingObj = true;
-        }             
+        }
 
         /// <summary>
         /// Map source to destination
         /// </summary>
         /// <param name="source">The source</param>
         /// <param name="automap">Flag to use auto mapping (reflective)</param>
-        /// <returns cref="IMyMapperRules">The mapper rules</returns>
+        /// <returns cref="IMyMapperRules{TSource, TDestination}">The mapper rules</returns>
         /// <exception cref="ArgumentNullException">Throws ArgumentNullException exception</exception>
         public IMyMapperRules<TSource, TDestination> Map(TSource source, bool automap = true)
         {
@@ -70,8 +70,15 @@ namespace MyMapper
             }            
 
             return this;
-        }        
+        }
 #if !NET4
+        /// <summary>
+        /// MapAsync source to destination
+        /// </summary>
+        /// <param name="source">The source</param>
+        /// <param name="automap">Flag to use auto mapping (reflective)</param>
+        /// <returns cref="IMyMapperRules{TSource, TDestination}">The mapper rules</returns>
+        /// <exception cref="ArgumentNullException">Throws ArgumentNullException exception</exception>
         public async Task<IMyMapperRules<TSource, TDestination>> MapAsync(TSource source, bool automap = true)
         {
             if (source == null)
@@ -103,7 +110,7 @@ namespace MyMapper
         /// <typeparam name="TProperty">The proerty</typeparam>
         /// <param name="source">The source</param>
         /// <param name="destination">The destination</param>
-        /// <returns><see cref="IMyMapperRules<TSource, TDestination>"/></returns>
+        /// <returns><see cref="IMyMapperRules{TSource, TDestination}"/></returns>
         public IMyMapperRules<TSource, TDestination> With<TProperty>(
                                                                         Func<TSource, TProperty> source,
                                                                         Action<TDestination, TProperty> destination
@@ -124,7 +131,7 @@ namespace MyMapper
         /// <param name="source">The source</param>
         /// <param name="destination">The destination</param>
         /// <param name="map">The source to destination map</param>
-        /// <returns><see cref="IMyMapperRules<TSource, TDestination>"/></returns>
+        /// <returns><see cref="IMyMapperRules{TSource, TDestination}"/></returns>
         public IMyMapperRules<TSource, TDestination> With<TSourceResult, TDestinationResult>(
                                                         Func<TSource, TSourceResult> source,
                                                         Action<TDestination, TDestinationResult> destination,
@@ -145,7 +152,7 @@ namespace MyMapper
         /// <param name="source">The source</param>
         /// <param name="destination">The destination</param>
         /// <param name="map">The source to destination map</param>
-        /// <returns><see cref="IMyMapperRules<TSource, TDestination>"/></returns>
+        /// <returns><see cref="IMyMapperRules{TSource, TDestination}"/></returns>
         public IMyMapperRules<TSource, TDestination> With<TSourceResult, TDestinationResult>(
                                                         Func<TSource, ICollection<TSourceResult>> source,
                                                         Action<TDestination, ICollection<TDestinationResult>> destination,
@@ -171,7 +178,7 @@ namespace MyMapper
         /// <param name="source">The source</param>
         /// <param name="destination">The destination</param>
         /// <param name="map">The source to destination map</param>
-        /// <returns><see cref="IMyMapperRules<TSource, TDestination>"/></returns>
+        /// <returns><see cref="IMyMapperRules{TSource, TDestination}"/></returns>
         public IMyMapperRules<TSource, TDestination> ParallelWith<TSourceResult, TDestinationResult>(
                                                 Func<TSource, ICollection<TSourceResult>> source,
                                                 Action<TDestination, ICollection<TDestinationResult>> destination,
@@ -197,7 +204,7 @@ namespace MyMapper
         /// <param name="source">The source</param>
         /// <param name="destination">The destination</param>
         /// <param name="map">The source to destination map</param>
-        /// <returns>><see cref="IMyMapperRules<TSource, TDestination>"/></returns>
+        /// <returns>><see cref="IMyMapperRules{TSource, TDestination}"/></returns>
         public IMyMapperRules<TSource, TDestination> With<TSourceResult, TDestinationResult>(
                                                         Func<TSource, IEnumerable<TSourceResult>> source,
                                                         Action<TDestination, IEnumerable<TDestinationResult>> destination,
@@ -216,6 +223,33 @@ namespace MyMapper
         }
 
         /// <summary>
+        /// With
+        /// </summary>
+        /// <typeparam name="TSourceKey">The source dictionary key type</typeparam>
+        /// <typeparam name="TSourceValue">The source dictionary value type</typeparam>
+        /// <typeparam name="TDestinationKey">The destination dictionary key type</typeparam>
+        /// <typeparam name="TDestinationValue">The destination dictionary value type</typeparam>
+        /// <param name="source">The source</param>
+        /// <param name="destination">The destination</param>
+        /// <param name="map">The source to destination map</param>
+        /// <returns>><see cref="IMyMapperRules{TSource, TDestination}"/></returns>
+        public IMyMapperRules<TSource, TDestination> With<TSourceKey, TSourceValue, TDestinationKey, TDestinationValue>(
+                                                        Func<TSource, Dictionary<TSourceKey, TSourceValue>> source,
+                                                        Action<TDestination, Dictionary<TDestinationKey, TDestinationValue>> destination,
+                                                        Func<TSourceKey, TDestinationKey> mapKey, Func<TSourceValue, TDestinationValue> mapValue
+                                                    )
+        {
+            var sourceList = source(this.Source);
+
+            var destinationList = sourceList.Select(x => new KeyValuePair<TDestinationKey, TDestinationValue>(mapKey(x.Key), mapValue(x.Value)))
+                                            .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+
+            destination(this.Destination, destinationList);
+
+            return this;
+        }
+
+        /// <summary>
         /// Parallel With - Uses PLINQ
         /// </summary>
         /// <typeparam name="TSourceResult">The source result type</typeparam>
@@ -223,7 +257,7 @@ namespace MyMapper
         /// <param name="source">The source</param>
         /// <param name="destination">The destination</param>
         /// <param name="map">The source to destination map</param>
-        /// <returns>><see cref="IMyMapperRules<TSource, TDestination>"/></returns>
+        /// <returns>><see cref="IMyMapperRules{TSource, TDestination}"/></returns>
         public IMyMapperRules<TSource, TDestination> ParallelWith<TSourceResult, TDestinationResult>(
                                                         Func<TSource, IEnumerable<TSourceResult>> source,
                                                         Action<TDestination, IEnumerable<TDestinationResult>> destination,
@@ -249,7 +283,7 @@ namespace MyMapper
         /// <param name="source">The source</param>
         /// <param name="destination">The destination</param>
         /// <param name="map">The source to destination map</param>
-        /// <returns>><see cref="IMyMapperRules<TSource, TDestination>"/></returns>
+        /// <returns>><see cref="IMyMapperRules{TSource, TDestination}"/></returns>
         public IMyMapperRules<TSource, TDestination> With<TSourceResult, TDestinationResult>(
                                                         Func<TSource, IList<TSourceResult>> source,
                                                         Action<TDestination, IList<TDestinationResult>> destination,
@@ -275,7 +309,7 @@ namespace MyMapper
         /// <param name="source">The source</param>
         /// <param name="destination">The destination</param>
         /// <param name="map">The source to destination map</param>
-        /// <returns>><see cref="IMyMapperRules<TSource, TDestination>"/></returns>
+        /// <returns>><see cref="IMyMapperRules{TSource, TDestination}"/></returns>
         public IMyMapperRules<TSource, TDestination> ParallelWith<TSourceResult, TDestinationResult>(
                                                 Func<TSource, IList<TSourceResult>> source,
                                                 Action<TDestination, IList<TDestinationResult>> destination,
@@ -300,7 +334,7 @@ namespace MyMapper
         /// <param name="source">The source datatable</param>
         /// <param name="destination">The destination</param>
         /// <param name="map">The source to destination map</param>
-        /// <returns>><see cref="IMyMapperRules<TSource, TDestination>"/></returns>
+        /// <returns>><see cref="IMyMapperRules{TSource, TDestination}"/></returns>
         public IMyMapperRules<TSource, TDestination> With<TDestinationResult>(
                                                         Func<TSource, DataTable> source,
                                                         Action<TDestination, IList<TDestinationResult>> destination,
@@ -329,7 +363,7 @@ namespace MyMapper
         /// <param name="when">The when condition</param>
         /// <param name="source">The source</param>
         /// <param name="destination">The destination</param>
-        /// <returns><see cref="IMyMapperRules<TSource, TDestination>"/></returns>
+        /// <returns><see cref="IMyMapperRules{TSource, TDestination}"/></returns>
         public IMyMapperRules<TSource, TDestination> WithWhen<TProperty>(
                                                                         Func<TSource, bool> when,
                                                                         Func<TSource, TProperty> source,
@@ -353,7 +387,7 @@ namespace MyMapper
         /// </summary>
         /// <param name="when">The when condition</param>
         /// <param name="then">The then action</param>
-        /// <returns><see cref="IMyMapperRules<TSource, TDestination>"/></returns>
+        /// <returns><see cref="IMyMapperRules{TSource, TDestination}"/></returns>
         public IMyMapperRules<TSource, TDestination> When(
                                                         Func<TSource, bool> when,
                                                         Action<IMyMapperRules<TSource, TDestination>> then
@@ -372,7 +406,7 @@ namespace MyMapper
         /// </summary>
         /// <typeparam name="TProperty">The property type</typeparam>
         /// <param name="on">The property for the switch</param>
-        /// <returns><see cref="IMyMapperSwitch<TSource, TDestination, TProperty>"/></returns>
+        /// <returns><see cref="IMyMapperSwitch{TSource, TDestination, TProperty}"/></returns>
         public IMyMapperSwitch<TSource, TDestination, TProperty> Switch<TProperty>(Func<TSource, TProperty> on)
         {
             IMyMapperSwitch<TSource, TDestination, TProperty> sw = new MyMapperSwitch<TSource, TDestination, TProperty>(

@@ -56,7 +56,7 @@ namespace MyMapper.UnitTests
                 InsuranceMutualFund = new InsuranceMutualFund { MutualFundNumber = "123", TaxNo = "456" },
                 InsuranceSuperannuation = new InsuranceSuperannuation { SuperannuationNumber = "789", TaxFileNumber = "456" },
                 InsuranceEmployment = new InsuranceEmployment { EmploymentNumber = "678", TaxNumber = "456" },
-                InsuranceType = Entities.InsuranceType.Employment,
+                InsuranceType = InsuranceType.Employment,
                 BankingInfos = new List<BankingInfo1>()
                 {
                     new BankingInfo1
@@ -69,7 +69,8 @@ namespace MyMapper.UnitTests
                         AccountName = "XYZ",
                         AccountNo = "2"
                     }
-                }
+                },
+                EmploymentCodes = new Dictionary<string, string>() { { "E", "Engineer" } }
             };
 
             //Mapping source to new destination
@@ -100,6 +101,8 @@ namespace MyMapper.UnitTests
             Assert.IsTrue(destination.BankingInformation[0].AccountNumber == source.BankingInfos[0].AccountNo);
             Assert.IsTrue(destination.BankingInformation[1].AccountName == source.BankingInfos[1].AccountName);
             Assert.IsTrue(destination.BankingInformation[1].AccountNumber == source.BankingInfos[1].AccountNo);
+            Assert.IsTrue(destination.LabourCodes.Count == source.EmploymentCodes.Count);
+            Assert.IsTrue(destination.LabourCodes["E"] == source.EmploymentCodes["E"]);
 
             //Mapping source to existing destination
             Response3 destination_1 = new Response3() { Existing = "Mapping to existing destination object" };
@@ -131,7 +134,9 @@ namespace MyMapper.UnitTests
             Assert.IsTrue(destination.BankingInformation[0].AccountName == source.BankingInfos[0].AccountName);
             Assert.IsTrue(destination.BankingInformation[0].AccountNumber == source.BankingInfos[0].AccountNo);
             Assert.IsTrue(destination.BankingInformation[1].AccountName == source.BankingInfos[1].AccountName);
-            Assert.IsTrue(destination.BankingInformation[1].AccountNumber == source.BankingInfos[1].AccountNo);            
+            Assert.IsTrue(destination.BankingInformation[1].AccountNumber == source.BankingInfos[1].AccountNo);
+            Assert.IsTrue(destination.LabourCodes.Count == source.EmploymentCodes.Count);
+            Assert.IsTrue(destination.LabourCodes["E"] == source.EmploymentCodes["E"]);
 
             //Mapping source to existing destination (this)
             Response4 source_2 = new Response4() { IDNumber = "XYZ", AccountNumber = "123" };
@@ -203,7 +208,8 @@ namespace MyMapper.UnitTests
                         AccountName = "XYZ",
                         AccountNo = "2"
                     }
-                }
+                },
+                EmploymentCodes = new Dictionary<string, string>() { { "E", "Engineer" } }
             };
 
             //Mapping source to new destination
@@ -234,6 +240,8 @@ namespace MyMapper.UnitTests
             Assert.IsTrue(destination.BankingInformation[0].AccountNumber == source.BankingInfos[0].AccountNo);
             Assert.IsTrue(destination.BankingInformation[1].AccountName == source.BankingInfos[1].AccountName);
             Assert.IsTrue(destination.BankingInformation[1].AccountNumber == source.BankingInfos[1].AccountNo);
+            Assert.IsTrue(destination.LabourCodes.Count == source.EmploymentCodes.Count);
+            Assert.IsTrue(destination.LabourCodes["E"] == source.EmploymentCodes["E"]);
 
             //Mapping source to existing destination
             Response3 destination_1 = new Response3() { Existing = "Mapping to existing destination object" };
@@ -266,6 +274,8 @@ namespace MyMapper.UnitTests
             Assert.IsTrue(destination.BankingInformation[0].AccountNumber == source.BankingInfos[0].AccountNo);
             Assert.IsTrue(destination.BankingInformation[1].AccountName == source.BankingInfos[1].AccountName);
             Assert.IsTrue(destination.BankingInformation[1].AccountNumber == source.BankingInfos[1].AccountNo);
+            Assert.IsTrue(destination.LabourCodes.Count == source.EmploymentCodes.Count);
+            Assert.IsTrue(destination.LabourCodes["E"] == source.EmploymentCodes["E"]);
 
             //Mapping source to existing destination (this)
             Response4 source_2 = new Response4() { IDNumber = "XYZ", AccountNumber = "123" };

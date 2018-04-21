@@ -330,6 +330,18 @@ namespace System.Threading.Tasks
             return task.ContinueWith(myMapper => myMapper.Result.With(source, destination, map));
         }
 
+        public static Task<IMyMapperRules<TSource, TDestination>> With<TSource, TDestination, TSourceKey, TSourceValue, TDestinationKey, TDestinationValue>(
+                                                                            this Task<IMyMapperRules<TSource, TDestination>> task,
+                                                                            Func<TSource, Dictionary<TSourceKey, TSourceValue>> source,
+                                                                            Action<TDestination, Dictionary<TDestinationKey, TDestinationValue>> destination,
+                                                                            Func<TSourceKey, TDestinationKey> mapKey, Func<TSourceValue, TDestinationValue> mapValue
+                                                                        )
+            where TSource : class
+            where TDestination : class, new()
+        {
+            return task.ContinueWith(myMapper => myMapper.Result.With(source, destination, mapKey, mapValue));
+        }
+
         public static Task<IMyMapperRules<TSource, TDestination>> ParallelWith<TSource, TDestination, TSourceResult, TDestinationResult>(
                                                                             this Task<IMyMapperRules<TSource, TDestination>> task,
                                                                             Func<TSource, ICollection<TSourceResult>> source,

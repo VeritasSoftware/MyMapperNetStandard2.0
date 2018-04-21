@@ -57,6 +57,12 @@ namespace MyMapper
                                                     )
             where TDestinationResult : class, new();
 
+        IMyMapperRules<TSource, TDestination> With<TSourceKey, TSourceValue, TDestinationKey, TDestinationValue>(
+                                                        Func<TSource, Dictionary<TSourceKey, TSourceValue>> source,
+                                                        Action<TDestination, Dictionary<TDestinationKey, TDestinationValue>> destination,
+                                                        Func<TSourceKey, TDestinationKey> mapKey, Func<TSourceValue, TDestinationValue> mapValue
+                                                    );
+
         IMyMapperRules<TSource, TDestination> ParallelWith<TSourceResult, TDestinationResult>(
                                                 Func<TSource, ICollection<TSourceResult>> source,
                                                 Action<TDestination, ICollection<TDestinationResult>> destination,
