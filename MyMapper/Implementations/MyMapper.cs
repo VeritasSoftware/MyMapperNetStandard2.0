@@ -231,7 +231,8 @@ namespace MyMapper
         /// <typeparam name="TDestinationValue">The destination dictionary value type</typeparam>
         /// <param name="source">The source</param>
         /// <param name="destination">The destination</param>
-        /// <param name="map">The source to destination map</param>
+        /// <param name="mapKey">The map for the key</param>
+        /// <param name="mapValue">The map for the value</param>
         /// <returns>><see cref="IMyMapperRules{TSource, TDestination}"/></returns>
         public IMyMapperRules<TSource, TDestination> With<TSourceKey, TSourceValue, TDestinationKey, TDestinationValue>(
                                                         Func<TSource, Dictionary<TSourceKey, TSourceValue>> source,

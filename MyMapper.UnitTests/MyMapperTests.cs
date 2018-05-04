@@ -70,7 +70,7 @@ namespace MyMapper.UnitTests
                         AccountNo = "2"
                     }
                 },
-                EmploymentCodes = new Dictionary<string, string>() { { "E", "Engineer" } }
+                EmploymentCodes = new Dictionary<EmploymentCode, string>() { { EmploymentCode.E, "Engineer" } }
             };
 
             //Mapping source to new destination
@@ -102,7 +102,7 @@ namespace MyMapper.UnitTests
             Assert.IsTrue(destination.BankingInformation[1].AccountName == source.BankingInfos[1].AccountName);
             Assert.IsTrue(destination.BankingInformation[1].AccountNumber == source.BankingInfos[1].AccountNo);
             Assert.IsTrue(destination.LabourCodes.Count == source.EmploymentCodes.Count);
-            Assert.IsTrue(destination.LabourCodes["E"] == source.EmploymentCodes["E"]);
+            Assert.IsTrue(destination.LabourCodes[LabourCode.ENG] == source.EmploymentCodes[EmploymentCode.E]);
 
             //Mapping source to existing destination
             Response3 destination_1 = new Response3() { Existing = "Mapping to existing destination object" };
@@ -136,7 +136,7 @@ namespace MyMapper.UnitTests
             Assert.IsTrue(destination.BankingInformation[1].AccountName == source.BankingInfos[1].AccountName);
             Assert.IsTrue(destination.BankingInformation[1].AccountNumber == source.BankingInfos[1].AccountNo);
             Assert.IsTrue(destination.LabourCodes.Count == source.EmploymentCodes.Count);
-            Assert.IsTrue(destination.LabourCodes["E"] == source.EmploymentCodes["E"]);
+            Assert.IsTrue(destination.LabourCodes[LabourCode.ENG] == source.EmploymentCodes[EmploymentCode.E]);
 
             //Mapping source to existing destination (this)
             Response4 source_2 = new Response4() { IDNumber = "XYZ", AccountNumber = "123" };
@@ -209,7 +209,7 @@ namespace MyMapper.UnitTests
                         AccountNo = "2"
                     }
                 },
-                EmploymentCodes = new Dictionary<string, string>() { { "E", "Engineer" } }
+                EmploymentCodes = new Dictionary<EmploymentCode, string>() { { EmploymentCode.E, "Engineer" } }
             };
 
             //Mapping source to new destination
@@ -241,7 +241,7 @@ namespace MyMapper.UnitTests
             Assert.IsTrue(destination.BankingInformation[1].AccountName == source.BankingInfos[1].AccountName);
             Assert.IsTrue(destination.BankingInformation[1].AccountNumber == source.BankingInfos[1].AccountNo);
             Assert.IsTrue(destination.LabourCodes.Count == source.EmploymentCodes.Count);
-            Assert.IsTrue(destination.LabourCodes["E"] == source.EmploymentCodes["E"]);
+            Assert.IsTrue(destination.LabourCodes[LabourCode.ENG] == source.EmploymentCodes[EmploymentCode.E]);
 
             //Mapping source to existing destination
             Response3 destination_1 = new Response3() { Existing = "Mapping to existing destination object" };
@@ -275,7 +275,7 @@ namespace MyMapper.UnitTests
             Assert.IsTrue(destination.BankingInformation[1].AccountName == source.BankingInfos[1].AccountName);
             Assert.IsTrue(destination.BankingInformation[1].AccountNumber == source.BankingInfos[1].AccountNo);
             Assert.IsTrue(destination.LabourCodes.Count == source.EmploymentCodes.Count);
-            Assert.IsTrue(destination.LabourCodes["E"] == source.EmploymentCodes["E"]);
+            Assert.IsTrue(destination.LabourCodes[LabourCode.ENG] == source.EmploymentCodes[EmploymentCode.E]);
 
             //Mapping source to existing destination (this)
             Response4 source_2 = new Response4() { IDNumber = "XYZ", AccountNumber = "123" };

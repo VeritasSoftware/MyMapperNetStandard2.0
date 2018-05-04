@@ -75,6 +75,11 @@ namespace MyMapper.UnitTests.Entities
         Employment
     }
 
+    public enum EmploymentCode
+    {
+        E = 0
+    }   
+
     public class Response1
     {
         public int ConsumerID { get; set; }
@@ -98,7 +103,7 @@ namespace MyMapper.UnitTests.Entities
 
         public InsuranceType InsuranceType { get; set; }
 
-        public Dictionary<string, string> EmploymentCodes { get; set; }
+        public Dictionary<EmploymentCode, string> EmploymentCodes { get; set; }
     }
     #endregion
 
@@ -155,6 +160,12 @@ namespace MyMapper.UnitTests.Entities
         public string TaxNumber { get; set; }
     }
 
+    public enum LabourCode
+    {
+        None = 0,
+        ENG = 1       
+    }
+
     public class Response3
     {
         public int IDNumber { get; set; }
@@ -178,7 +189,7 @@ namespace MyMapper.UnitTests.Entities
         //Mapping to an existing destination object
         public string Existing { get; set; }
 
-        public Dictionary<string, string> LabourCodes { get; set; }
+        public Dictionary<LabourCode, string> LabourCodes { get; set; }
     }   
     #endregion
 

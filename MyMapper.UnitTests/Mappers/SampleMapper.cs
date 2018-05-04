@@ -86,6 +86,17 @@ namespace MyMapper.UnitTests.Mappers
                                                                  .Exec();
         }
 
+        public LabourCode Map (EmploymentCode employmentCode)
+        {
+            switch(employmentCode)
+            {
+                case EmploymentCode.E:
+                    return LabourCode.ENG;
+                default:
+                    return LabourCode.None;
+            }
+        }
+
         public Response3 Map(Response1 response1)
         {
             return Mapper<Response1, Response3>.Map(response1)
@@ -117,7 +128,7 @@ namespace MyMapper.UnitTests.Mappers
                                                     //Mapping List
                                                     .With(r1 => r1.BankingInfos, (r3, bankingInfos) => r3.BankingInformation = bankingInfos, Map)
                                                     //Mapping Dictionary
-                                                    .With(r1 => r1.EmploymentCodes, (r3, employmentCodes) => r3.LabourCodes = employmentCodes, key => key, val => val)
+                                                    .With(r1 => r1.EmploymentCodes, (r3, employmentCodes) => r3.LabourCodes = employmentCodes, key => Map(key), val => val)
                                                     //Using another map - When Details1 is not null then map Details1 to Details3 using another map 
                                                     .When(r1 => r1.Details != null, mapper => mapper.With(r1 => r1.Details, (r3, details3) => r3.Details = details3, Map))
                                                     //Using another map - When Fund1 is not null then map Fund1 to Fund3 using another map 
@@ -156,7 +167,7 @@ namespace MyMapper.UnitTests.Mappers
                                                     //Mapping List
                                                     .With(r1 => r1.BankingInfos, (r3, bankingInfos) => r3.BankingInformation = bankingInfos, Map)
                                                     //Mapping Dictionary
-                                                    .With(r1 => r1.EmploymentCodes, (r3, employmentCodes) => r3.LabourCodes = employmentCodes, key => key, val => val)
+                                                    .With(r1 => r1.EmploymentCodes, (r3, employmentCodes) => r3.LabourCodes = employmentCodes, key => Map(key), val => val)
                                                     //Using another map - When Details1 is not null then map Details1 to Details3 using another map 
                                                     .When(r1 => r1.Details != null, mapper => mapper.With(r1 => r1.Details, (r3, details3) => r3.Details = details3, Map))
                                                     //Using another map - When Fund1 is not null then map Fund1 to Fund3 using another map 
@@ -195,7 +206,7 @@ namespace MyMapper.UnitTests.Mappers
                                                     //Mapping List
                                                     .With(r1 => r1.BankingInfos, (r3, bankingInfos) => r3.BankingInformation = bankingInfos, Map)
                                                     //Mapping Dictionary
-                                                    .With(r1 => r1.EmploymentCodes, (r3, employmentCodes) => r3.LabourCodes = employmentCodes, key => key, val => val)
+                                                    .With(r1 => r1.EmploymentCodes, (r3, employmentCodes) => r3.LabourCodes = employmentCodes, key => Map(key), val => val)
                                                     //Using another map - When Details1 is not null then map Details1 to Details3 using another map 
                                                     .When(r1 => r1.Details != null, mapper => mapper.With(r1 => r1.Details, (r3, details3) => r3.Details = details3, Map))
                                                     //Using another map - When Fund1 is not null then map Fund1 to Fund3 using another map 
@@ -234,7 +245,7 @@ namespace MyMapper.UnitTests.Mappers
                                                     //Mapping List
                                                     .With(r1 => r1.BankingInfos, (r3, bankingInfos) => r3.BankingInformation = bankingInfos, Map)
                                                     //Mapping Dictionary
-                                                    .With(r1 => r1.EmploymentCodes, (r3, employmentCodes) => r3.LabourCodes = employmentCodes, key => key, val => val)
+                                                    .With(r1 => r1.EmploymentCodes, (r3, employmentCodes) => r3.LabourCodes = employmentCodes, key => Map(key), val => val)
                                                     //Using another map - When Details1 is not null then map Details1 to Details3 using another map 
                                                     .When(r1 => r1.Details != null, mapper => mapper.With(r1 => r1.Details, (r3, details3) => r3.Details = details3, Map))
                                                     //Using another map - When Fund1 is not null then map Fund1 to Fund3 using another map 
