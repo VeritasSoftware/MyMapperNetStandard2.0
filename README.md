@@ -7,6 +7,8 @@
 
 [**.NET Fiddle demo**](https://dotnetfiddle.net/1WB7py)
 
+[**Wiki Documentation**](https://github.com/VeritasSoftware/MyMapperNetStandard2.0/wiki/Using-MyMapper-extensions)
+
 Please read SampleMapper.cs code file to learn how to create mappers using MyMapper framework.
 
 Please read SampleMapper-WithExtensions.cs code file to learn how to create mappers using MyMapper framework extensions.
@@ -27,5 +29,3 @@ Features:
 *	Dependency injectable.
 *	.NET Object and IEnumerable`<T>` integration extensions. Async support.
 *	Feature to map source to existing destination object.
-
-[**Wiki Documentation**](https://github.com/VeritasSoftware/MyMapperNetStandard2.0/wiki/Using-MyMapper-extensions)
